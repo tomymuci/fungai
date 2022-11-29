@@ -4,7 +4,8 @@ __pycache__/
 *$py.class
 
 processed
-raw_data
+raw_data/Mushrooms
+
 
 # C extensions
 *.so
