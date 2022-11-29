@@ -1,11 +1,12 @@
 import numpy as np
 import os
+import shutil
 from sklearn.preprocessing import LabelBinarizer
 from sklearn.model_selection import train_test_split
 
-
-from FungAI.data_sources.load import load_local, load_cloud
+from FungAI.data_sources.load import load_local
 from FungAI.ml.model import initialize_model, train_model, evaluate_model
+from FungAI.ml.registry import save_model, load_model
 
 def preprocessor() :
     '''Load the data (from local for now), preprocess it and save it'''
@@ -13,8 +14,8 @@ def preprocessor() :
     if "processed" not in os.listdir(".") :
         os.mkdir("processed")
     else :
-        os.remove("processed/X.npy")
-        os.remove("processed/y.npy")
+        shutil.rmtree("processed")
+        os.mkdir("processed")
 
     print("\n 🍄 Loading images...\n")
 
@@ -29,10 +30,16 @@ def preprocessor() :
     y = encoder.transform(_y)
     X = _X / 255
 
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.33, random_state = 42)
+
     print("\n 🍄 Processing done, saving...\n")
 
-    np.save("processed/X.npy", X)
-    np.save("processed/y.npy", y)
+    np.save("processed/X_train.npy", X_train)
+    np.save("processed/y_train.npy", y_train)
+    np.save("processed/X_test.npy", X_test)
+    np.save("processed/y_test.npy", y_test)
+
+    print("\n 🍄 Data saved...\n")
 
     return None
 
@@ -40,10 +47,12 @@ def train() :
 
     print("\n 🍄 Initializing model...\n")
 
-    X = np.load("processed/X.npy")
-    y = np.load("processed/y.npy")
+    if "processed" not in os.listdir(".") :
+        print("\n 🍄 no saved data, run preprocessing first.\n")
+        return None
 
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.33, random_state = 42)
+    X_train = np.load("processed/X_train.npy")
+    y_train = np.load("processed/y_train.npy")
 
     model = initialize_model()
 
@@ -55,13 +64,26 @@ def train() :
 
     print(f"\n val_accuracy : {history.history['val_accuracy']}")
 
-    return model, history, X_test, y_test
+    print("\n 🍄 Saving model...\n")
+
+    save_model(model)
+
+    print("\n 🍄 Model saved\n")
+
+    return model, history
 
 def evaluate() :
 
-    print("\n 🍄 Loading and training model...\n")
+    print("\n 🍄 Loading model and data...\n")
 
-    model, history, X_test, y_test = train()
+    model = load_model()
+
+    if model is None :
+        print("\n 🍄 There is no saved model, run training first.\n")
+        return None
+
+    X_test = np.load("processed/X_test.npy")
+    y_test = np.load("processed/y_test.npy")
 
     print("\n 🍄 Evaluating model...\n")
 

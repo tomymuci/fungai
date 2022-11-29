@@ -5,6 +5,7 @@ __pycache__/
 
 processed
 raw_data/Mushrooms
+models
 
 
 # C extensions
