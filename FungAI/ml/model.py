@@ -1,3 +1,5 @@
+import numpy as np
+
 from tensorflow.keras import models, layers
 from tensorflow.keras.callbacks import EarlyStopping
 
@@ -28,11 +30,10 @@ def initialize_model():
 
     return model
 
-def train_model(X_train, y_train) :
+def train_model(model, X: np.ndarray, y: np.ndarray, batch_size = 16, patience = 1, validation_split = 0.2) :
     '''whatever'''
 
-    model = initialize_model()
-    es = EarlyStopping()
-    model, history = model.fit(X_train,y_train, batch_size=16, epochs=5, callbacks=[es], verbose=1, validation_split=0.2)
+    es = EarlyStopping(patience = patience, restore_best_weights = True)
+    history = model.fit(X, y, batch_size = batch_size, epochs = 5, callbacks = [es], verbose = 1, validation_split = validation_split)
 
     return model, history
