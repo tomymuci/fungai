@@ -11,6 +11,8 @@ def preprocessor() :
 
     _X, _y = load_local()
 
+    print("\n 🍄 Loading done, preprocessing starting...\n")
+
     labels = np.unique(_y)
     encoder = LabelBinarizer()
     encoder.fit(labels)
@@ -20,6 +22,8 @@ def preprocessor() :
 
     # X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.33, random_state = 42)
 
+    print("\n 🍄 Processing done, saving...\n")
+
     np.save("processed/X.npy", X)
     np.save("processed/y.npy", y)
 
@@ -27,12 +31,18 @@ def preprocessor() :
 
 def train() :
 
+    print("\n 🍄 Initializing model...\n")
+
     X = np.load("processed/X.npy")
     y = np.load("processed/y.npy")
 
     model = initialize_model()
 
+    print("\n 🍄 Training model...\n")
+
     model, history = train_model(model = model, X = X, y = y)
+
+    print("\n 🍄 Model trained\n")
 
     print(f"\n val_accuracy : {history.history['val_accuracy']}")
 
