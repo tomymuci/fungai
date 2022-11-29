@@ -20,11 +20,15 @@ def preprocessor() :
 
     # X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.33, random_state = 42)
 
-    return X, y
+    np.save("processed/X.npy", X)
+    np.save("processed/y.npy", y)
+
+    return None
 
 def train() :
 
-    X, y = preprocessor()
+    X = np.load("processed/X.npy")
+    y = np.load("processed/y.npy")
 
     model = initialize_model()
 

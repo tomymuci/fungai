@@ -3,7 +3,7 @@ reinstall_package:
 	@pip install -e .
 
 run_preprocess:
-	python -c 'from FungAI.interface.main import preprocess; print(preprocess());'
+	python -c 'from FungAI.interface.main import preprocessor; preprocessor();'
 
-run_model:
+run_train:
 	python -c 'from FungAI.interface.main import train; train();'
