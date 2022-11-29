@@ -5,7 +5,7 @@ from tensorflow.keras.callbacks import EarlyStopping
 
 
 def initialize_model():
-    '''whatever'''
+    '''Initialize a model'''
 
     model = models.Sequential()
 
@@ -31,7 +31,7 @@ def initialize_model():
     return model
 
 def train_model(model, X: np.ndarray, y: np.ndarray, batch_size = 16, patience = 1, validation_split = 0.2) :
-    '''whatever'''
+    '''Train a model.'''
 
     es = EarlyStopping(patience = patience, restore_best_weights = True)
     history = model.fit(X, y, batch_size = batch_size, epochs = 5, callbacks = [es], verbose = 1, validation_split = validation_split)
@@ -39,6 +39,7 @@ def train_model(model, X: np.ndarray, y: np.ndarray, batch_size = 16, patience =
     return model, history
 
 def evaluate_model(model, X: np.ndarray, y: np.ndarray, batch_size = 16) :
+    '''Evaluate a model.'''
 
     metrics = model.evaluate(x=X, y=y, batch_size=batch_size, verbose=1, return_dict=True)
 

@@ -9,7 +9,7 @@ from FungAI.ml.model import initialize_model, train_model, evaluate_model
 from FungAI.ml.registry import save_model, load_model
 
 def preprocessor() :
-    '''Load the data (from local for now), preprocess it and save it'''
+    '''Load the data (from local for now), preprocess it and save it.'''
 
     if "processed" not in os.listdir(".") :
         os.mkdir("processed")
@@ -44,6 +44,7 @@ def preprocessor() :
     return None
 
 def train() :
+    '''Train a model with the saved data.'''
 
     print("\n 🍄 Initializing model...\n")
 
@@ -73,6 +74,7 @@ def train() :
     return model, history
 
 def evaluate() :
+    '''Evaluate a model with a saved model.'''
 
     print("\n 🍄 Loading model and data...\n")
 

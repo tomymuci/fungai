@@ -3,6 +3,7 @@ import pickle
 import shutil
 
 def save_model(model) :
+    '''Save a model in local directory'''
 
     if model is not None:
         if "models" not in os.listdir(".") :
@@ -18,6 +19,7 @@ def save_model(model) :
 
 
 def load_model() :
+    '''Load a model from local directory'''
 
     if "models" not in os.listdir(".") :
         return None
