@@ -24,9 +24,9 @@ def initialize_model():
     model.add(layers.Dense(9,activation='softmax'))
 
     ### Model compilation
-    model.compile(loss='categorical_crossentropy',
-                  optimizer='adam',
-                  metrics=['accuracy'])
+    model.compile(loss = 'categorical_crossentropy',
+                  optimizer = 'adam',
+                  metrics = ['accuracy'])
 
     return model
 
@@ -37,3 +37,9 @@ def train_model(model, X: np.ndarray, y: np.ndarray, batch_size = 16, patience =
     history = model.fit(X, y, batch_size = batch_size, epochs = 5, callbacks = [es], verbose = 1, validation_split = validation_split)
 
     return model, history
+
+def evaluate_model(model, X: np.ndarray, y: np.ndarray, batch_size = 16) :
+
+    metrics = model.evaluate(x=X, y=y, batch_size=batch_size, verbose=1, return_dict=True)
+
+    return metrics

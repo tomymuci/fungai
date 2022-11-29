@@ -5,7 +5,7 @@ from sklearn.model_selection import train_test_split
 
 
 from FungAI.data_sources.load import load_local, load_cloud
-from FungAI.ml.model import initialize_model, train_model
+from FungAI.ml.model import initialize_model, train_model, evaluate_model
 
 def preprocessor() :
     '''Load the data (from local for now), preprocess it and save it'''
@@ -29,8 +29,6 @@ def preprocessor() :
     y = encoder.transform(_y)
     X = _X / 255
 
-    # X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.33, random_state = 42)
-
     print("\n 🍄 Processing done, saving...\n")
 
     np.save("processed/X.npy", X)
@@ -45,20 +43,36 @@ def train() :
     X = np.load("processed/X.npy")
     y = np.load("processed/y.npy")
 
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.33, random_state = 42)
+
     model = initialize_model()
 
     print("\n 🍄 Training model...\n")
 
-    model, history = train_model(model = model, X = X, y = y)
+    model, history = train_model(model = model, X = X_train, y = y_train)
 
     print("\n 🍄 Model trained\n")
 
     print(f"\n val_accuracy : {history.history['val_accuracy']}")
 
-    return model, history
+    return model, history, X_test, y_test
 
 def evaluate() :
-    pass
+
+    print("\n 🍄 Loading and training model...\n")
+
+    model, history, X_test, y_test = train()
+
+    print("\n 🍄 Evaluating model...\n")
+
+    metrics = evaluate_model(model, X = X_test, y = y_test)
+
+    loss = metrics["loss"]
+    accuracy = metrics["accuracy"]
+
+    print(f"\n🍄 model evaluated: loss {round(loss, 2)} accuracy {round(accuracy, 2)}")
+
+    return None
 
 def pred() :
     pass

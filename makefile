@@ -7,3 +7,6 @@ run_preprocess:
 
 run_train:
 	python -c 'from FungAI.interface.main import train; train();'
+
+run_train_eval:
+	python -c 'from FungAI.interface.main import evaluate; evaluate();'
