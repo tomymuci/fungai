@@ -1,4 +1,5 @@
 import numpy as np
+import os
 from sklearn.preprocessing import LabelBinarizer
 from sklearn.model_selection import train_test_split
 
@@ -7,7 +8,15 @@ from FungAI.data_sources.load import load_local, load_cloud
 from FungAI.ml.model import initialize_model, train_model
 
 def preprocessor() :
-    '''Load the data (from local for now) and preprocess it'''
+    '''Load the data (from local for now), preprocess it and save it'''
+
+    if "processed" not in os.listdir(".") :
+        os.mkdir("processed")
+    else :
+        os.remove("processed/X.npy")
+        os.remove("processed/y.npy")
+
+    print("\n 🍄 Loading images...\n")
 
     _X, _y = load_local()
 
