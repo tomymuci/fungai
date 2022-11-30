@@ -17,7 +17,7 @@ def save_model_local(model = None) :
         pickle.dump(model, open(f'{LOCAL_REGISTRY_PATH}/model.pkl', 'wb'))
         message = "\n 🍄 Model saved\n"
     else :
-        message = "\n ❗️Model is None, cannot save❗️\n"
+        message = "\n❗️Model is None, cannot save❗️\n"
 
     return message
 
@@ -57,7 +57,7 @@ def save_model_mlflow(model = None, params = None, metrics = None) :
 
         message = "\n 🍄 Model saved\n"
     else :
-        message = "\n ❗️Model is None, cannot save❗️\n"
+        message = "\n❗️Model is None, cannot save❗️\n"
 
     return message
 
@@ -71,7 +71,7 @@ def load_model_mlflow() :
     elif MLFLOW_MODEL_STATUS == "production" :
         model_uri = f"models:/{MLFLOW_MODEL_NAME}/production"
     else :
-        print("\n ❗️Wrong MLflow status❗️\n")
+        print("\n❗️Wrong MLflow status❗️\n")
         return None
 
     model = mlflow.keras.load_model(model_uri = model_uri)
