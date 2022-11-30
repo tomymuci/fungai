@@ -4,7 +4,7 @@ from tensorflow.keras import models, layers
 from tensorflow.keras.callbacks import EarlyStopping
 
 
-def initialize_model():
+def initialize_baseline_model(metrics = ['accuracy'], loss = 'categorical_crossentropy'):
     '''Initialize a model'''
 
     model = models.Sequential()
@@ -24,23 +24,26 @@ def initialize_model():
     model.add(layers.Dense(9,activation='softmax'))
 
     ### Model compilation
-    model.compile(loss = 'categorical_crossentropy',
+    model.compile(loss = loss,
                   optimizer = 'adam',
-                  metrics = ['accuracy'])
+                  metrics = metrics)
 
     return model
 
-def train_model(model, X: np.ndarray, y: np.ndarray, batch_size = 16, patience = 1, validation_split = 0.2) :
+def train_model(model, X: np.ndarray, y: np.ndarray, epochs = 5, batch_size = 16, patience = 1, validation_split = 0.2) :
     '''Train a model.'''
 
     es = EarlyStopping(patience = patience, restore_best_weights = True)
-    history = model.fit(X, y, batch_size = batch_size, epochs = 5, callbacks = [es], verbose = 1, validation_split = validation_split)
+    history = model.fit(X, y, batch_size = batch_size, epochs = epochs, callbacks = [es], verbose = 1, validation_split = validation_split)
 
     return model, history
 
 def evaluate_model(model, X: np.ndarray, y: np.ndarray, batch_size = 16) :
     '''Evaluate a model.'''
 
-    metrics = model.evaluate(x=X, y=y, batch_size=batch_size, verbose=1, return_dict=True)
+    metrics = model.evaluate(x = X, y = y, batch_size = batch_size, verbose = 2, return_dict = True)
 
     return metrics
+
+def predict_new() :
+    pass

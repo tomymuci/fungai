@@ -5,21 +5,29 @@ from sklearn.preprocessing import LabelBinarizer
 from sklearn.model_selection import train_test_split
 
 from FungAI.data_sources.load import load_local
-from FungAI.ml.model import initialize_model, train_model, evaluate_model
-from FungAI.ml.registry import save_model, load_model
+from FungAI.ml.model import initialize_baseline_model, train_model, evaluate_model
+from FungAI.ml.registry import save_model_local, load_model_local, save_model_mlflow, load_model_mlflow
+
+from FungAI.ml.params import LOCAL_DATA_PROCESSED_PATH, DATA_SOURCE, DATA_SAVE, DATA_LOAD, MODEL_SAVE, MODEL_LOAD
 
 def preprocessor() :
     '''Load the data (from local for now), preprocess it and save it.'''
 
-    if "processed" not in os.listdir(".") :
-        os.mkdir("processed")
-    else :
-        shutil.rmtree("processed")
-        os.mkdir("processed")
-
     print("\n 🍄 Loading images...\n")
 
-    _X, _y = load_local()
+    if DATA_SOURCE == "local" :
+
+        if LOCAL_DATA_PROCESSED_PATH not in os.listdir(".") :
+            os.mkdir(LOCAL_DATA_PROCESSED_PATH)
+        else :
+            shutil.rmtree(LOCAL_DATA_PROCESSED_PATH)
+            os.mkdir(LOCAL_DATA_PROCESSED_PATH)
+
+        _X, _y = load_local()
+
+    elif DATA_SOURCE == 'cloud' :
+        print("\n ❗️Data not loaded❗️\n 🍄 Only local source available for the moment.\n")
+        return None
 
     print("\n 🍄 Loading done, preprocessing starting...\n")
 
@@ -34,42 +42,76 @@ def preprocessor() :
 
     print("\n 🍄 Processing done, saving...\n")
 
-    np.save("processed/X_train.npy", X_train)
-    np.save("processed/y_train.npy", y_train)
-    np.save("processed/X_test.npy", X_test)
-    np.save("processed/y_test.npy", y_test)
+    if DATA_SAVE == "local" :
+        np.save(f"{LOCAL_DATA_PROCESSED_PATH}/X_train.npy", X_train)
+        np.save(f"{LOCAL_DATA_PROCESSED_PATH}/y_train.npy", y_train)
+        np.save(f"{LOCAL_DATA_PROCESSED_PATH}/X_test.npy", X_test)
+        np.save(f"{LOCAL_DATA_PROCESSED_PATH}/y_test.npy", y_test)
+    elif DATA_SAVE == 'cloud' :
+        print("\n ❗️Data not saved❗️\n 🍄 Only local saving available for the moment.\n")
+        return None
 
-    print("\n 🍄 Data saved...\n")
+    print("\n 🍄 Data saved\n")
 
     return None
 
 def train() :
     '''Train a model with the saved data.'''
 
+    params = {'epochs' : 100,
+              'batch_size' : 16,
+              'patience' : 10,
+              'metrics' : ['Accuracy'],
+              'loss' : 'categorical_crossentropy'
+             }
+
     print("\n 🍄 Initializing model...\n")
 
-    if "processed" not in os.listdir(".") :
-        print("\n 🍄 no saved data, run preprocessing first.\n")
+    if DATA_LOAD == "local" :
+
+        if "X_train.npy" not in os.listdir(LOCAL_DATA_PROCESSED_PATH) :
+            print("\n ❗️There is no saved data❗️\n 🍄 Run preprocessing first.\n")
+            return None
+
+        X_train = np.load(f"{LOCAL_DATA_PROCESSED_PATH}/X_train.npy")
+        y_train = np.load(f"{LOCAL_DATA_PROCESSED_PATH}/y_train.npy")
+
+    elif DATA_LOAD == "cloud" :
+        print("\n ❗️Data not loaded❗️\n 🍄 Only local source available for the moment.\n")
         return None
 
-    X_train = np.load("processed/X_train.npy")
-    y_train = np.load("processed/y_train.npy")
-
-    model = initialize_model()
+    model = initialize_baseline_model(metrics = params['metrics'], loss = params["loss"])
 
     print("\n 🍄 Training model...\n")
 
-    model, history = train_model(model = model, X = X_train, y = y_train)
+    model, history = train_model(model = model,
+                                 X = X_train,
+                                 y = y_train,
+                                 epochs = params["epochs"],
+                                 batch_size = params["batch_size"],
+                                 patience = params["patience"])
 
     print("\n 🍄 Model trained\n")
 
-    print(f"\n val_accuracy : {history.history['val_accuracy']}")
+    metrics = {}
+
+    for metric in params['metrics'] :
+        metrics[metric] = np.max(history.history[f"val_{metric}"])
+        print(f"\n val_{metric}: {metrics[metric]}")
 
     print("\n 🍄 Saving model...\n")
 
-    save_model(model)
+    if MODEL_SAVE == 'local' :
+        message = save_model_local(model)
+    elif MODEL_SAVE == "cloud" :
+        message = save_model_mlflow(model, params, metrics)
+        # print("\n ❗️Model not saved❗️\n 🍄 Only local saving available for the moment.\n")
+        # return None
+    else :
+        print("\n ❗️Model not saved❗️\n")
+        return None
 
-    print("\n 🍄 Model saved\n")
+    print(message)
 
     return model, history
 
@@ -78,14 +120,26 @@ def evaluate() :
 
     print("\n 🍄 Loading model and data...\n")
 
-    model = load_model()
-
-    if model is None :
-        print("\n 🍄 There is no saved model, run training first.\n")
+    if MODEL_LOAD == "local" :
+        model = load_model_local()
+    elif MODEL_LOAD == 'cloud' :
+        # print("\n ❗️Model not loaded❗️\n 🍄 Only local loading available for the moment.\n")
+        # return None
+        model = load_model_mlflow()
+    else :
+        print("\n ❗️Model not loaded❗️\n")
         return None
 
-    X_test = np.load("processed/X_test.npy")
-    y_test = np.load("processed/y_test.npy")
+    if model is None :
+        print("\n ❗️There is no saved model❗️\n 🍄 Run training first or change the loading parameters.\n")
+        return None
+
+    if DATA_LOAD == 'local' :
+        X_test = np.load(f"{LOCAL_DATA_PROCESSED_PATH}/X_test.npy")
+        y_test = np.load(f"{LOCAL_DATA_PROCESSED_PATH}/y_test.npy")
+    elif DATA_LOAD == 'cloud' :
+        print("\n ❗️Data not loaded❗️\n 🍄 Only local source available for the moment.\n")
+        return None
 
     print("\n 🍄 Evaluating model...\n")
 
@@ -94,7 +148,7 @@ def evaluate() :
     loss = metrics["loss"]
     accuracy = metrics["accuracy"]
 
-    print(f"\n🍄 model evaluated: loss {round(loss, 2)} accuracy {round(accuracy, 2)}")
+    print(f"\n 🍄 Model evaluated : loss {round(loss, 2)} accuracy {round(accuracy, 2)}")
 
     return None
 
