@@ -3,6 +3,8 @@ import os
 import shutil
 from sklearn.preprocessing import LabelBinarizer
 from sklearn.model_selection import train_test_split
+import matplotlib.pyplot as plt
+import cv2
 
 from FungAI.data_sources.load import load_local
 from FungAI.ml.model import initialize_baseline_model, train_model, evaluate_model
@@ -10,8 +12,9 @@ from FungAI.ml.registry import save_model_local, load_model_local, save_model_ml
 
 from FungAI.ml.params import LOCAL_DATA_PROCESSED_PATH, DATA_SOURCE, DATA_SAVE, DATA_LOAD, MODEL_SAVE, MODEL_LOAD
 
-def preprocessor() :
+def preprocessor(prediction = None) :
     '''Load the data (from local for now), preprocess it and save it.'''
+
 
     print("\n 🍄 Loading images...\n")
 
@@ -26,7 +29,8 @@ def preprocessor() :
         _X, _y = load_local()
 
     elif DATA_SOURCE == 'cloud' :
-        print("\n ❗️Data not loaded❗️\n 🍄 Only local source available for the moment.\n")
+
+        print("\n❗️Data not loaded❗️\n 🍄 Only local source available for the moment.\n")
         return None
 
     print("\n 🍄 Loading done, preprocessing starting...\n")
@@ -43,12 +47,15 @@ def preprocessor() :
     print("\n 🍄 Processing done, saving...\n")
 
     if DATA_SAVE == "local" :
+
         np.save(f"{LOCAL_DATA_PROCESSED_PATH}/X_train.npy", X_train)
         np.save(f"{LOCAL_DATA_PROCESSED_PATH}/y_train.npy", y_train)
         np.save(f"{LOCAL_DATA_PROCESSED_PATH}/X_test.npy", X_test)
         np.save(f"{LOCAL_DATA_PROCESSED_PATH}/y_test.npy", y_test)
+
     elif DATA_SAVE == 'cloud' :
-        print("\n ❗️Data not saved❗️\n 🍄 Only local saving available for the moment.\n")
+
+        print("\n❗️Data not saved❗️\n 🍄 Only local saving available for the moment.\n")
         return None
 
     print("\n 🍄 Data saved\n")
@@ -70,14 +77,14 @@ def train() :
     if DATA_LOAD == "local" :
 
         if "X_train.npy" not in os.listdir(LOCAL_DATA_PROCESSED_PATH) :
-            print("\n ❗️There is no saved data❗️\n 🍄 Run preprocessing first.\n")
+            print("\n❗️There is no saved data❗️\n 🍄 Run preprocessing first.\n")
             return None
 
         X_train = np.load(f"{LOCAL_DATA_PROCESSED_PATH}/X_train.npy")
         y_train = np.load(f"{LOCAL_DATA_PROCESSED_PATH}/y_train.npy")
 
     elif DATA_LOAD == "cloud" :
-        print("\n ❗️Data not loaded❗️\n 🍄 Only local source available for the moment.\n")
+        print("\n❗️Data not loaded❗️\n 🍄 Only local source available for the moment.\n")
         return None
 
     model = initialize_baseline_model(metrics = params['metrics'], loss = params["loss"])
@@ -105,10 +112,9 @@ def train() :
         message = save_model_local(model)
     elif MODEL_SAVE == "cloud" :
         message = save_model_mlflow(model, params, metrics)
-        # print("\n ❗️Model not saved❗️\n 🍄 Only local saving available for the moment.\n")
-        # return None
+
     else :
-        print("\n ❗️Model not saved❗️\n")
+        print("\n❗️Model not saved❗️\n")
         return None
 
     print(message)
@@ -127,18 +133,18 @@ def evaluate() :
         # return None
         model = load_model_mlflow()
     else :
-        print("\n ❗️Model not loaded❗️\n")
+        print("\n❗️Model not loaded❗️\n")
         return None
 
     if model is None :
-        print("\n ❗️There is no saved model❗️\n 🍄 Run training first or change the loading parameters.\n")
+        print("\n❗️There is no saved model❗️\n 🍄 Run training first or change the loading parameters.\n")
         return None
 
     if DATA_LOAD == 'local' :
         X_test = np.load(f"{LOCAL_DATA_PROCESSED_PATH}/X_test.npy")
         y_test = np.load(f"{LOCAL_DATA_PROCESSED_PATH}/y_test.npy")
     elif DATA_LOAD == 'cloud' :
-        print("\n ❗️Data not loaded❗️\n 🍄 Only local source available for the moment.\n")
+        print("\n❗️Data not loaded❗️\n 🍄 Only local source available for the moment.\n")
         return None
 
     print("\n 🍄 Evaluating model...\n")
