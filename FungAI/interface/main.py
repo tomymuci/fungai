@@ -3,11 +3,9 @@ import os
 import shutil
 from sklearn.preprocessing import LabelBinarizer
 from sklearn.model_selection import train_test_split
-import matplotlib.pyplot as plt
-import cv2
 
 from FungAI.data_sources.load import load_local
-from FungAI.ml.model import initialize_baseline_model, train_model, evaluate_model
+from FungAI.ml.model import initialize_model, train_model, evaluate_model
 from FungAI.ml.registry import save_model_local, load_model_local, save_model_mlflow, load_model_mlflow
 
 from FungAI.ml.params import LOCAL_DATA_PROCESSED_PATH, DATA_SOURCE, DATA_SAVE, DATA_LOAD, MODEL_SAVE, MODEL_LOAD
@@ -87,7 +85,7 @@ def train() :
         print("\n❗️Data not loaded❗️\n 🍄 Only local source available for the moment.\n")
         return None
 
-    model = initialize_baseline_model(metrics = params['metrics'], loss = params["loss"])
+    model = initialize_model(metrics = params['metrics'], loss = params["loss"])
 
     print("\n 🍄 Training model...\n")
 
@@ -129,8 +127,6 @@ def evaluate() :
     if MODEL_LOAD == "local" :
         model = load_model_local()
     elif MODEL_LOAD == 'cloud' :
-        # print("\n ❗️Model not loaded❗️\n 🍄 Only local loading available for the moment.\n")
-        # return None
         model = load_model_mlflow()
     else :
         print("\n❗️Model not loaded❗️\n")
@@ -156,7 +152,7 @@ def evaluate() :
 
     print(f"\n 🍄 Model evaluated : loss {round(loss, 2)} accuracy {round(accuracy, 2)}")
 
-    return None
+    return metrics
 
-def pred() :
+def pred(new_image) :
     pass

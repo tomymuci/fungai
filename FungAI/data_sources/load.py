@@ -4,6 +4,7 @@ import os
 import cv2
 from PIL import ImageFile
 ImageFile.LOAD_TRUNCATED_IMAGES = True # important to avoid an error (the truncated picture error)
+from google.cloud import storage
 
 from FungAI.ml.params import LOCAL_DATA_PATH
 
@@ -33,4 +34,15 @@ def load_local() :
 
 
 def load_cloud() :
-    pass
+    '''NOT WORKING'''
+
+    BUCKET_NAME = "zipped_mushrooms"
+
+    storage_filename = "data/raw/train_1k.csv"
+    local_filename = "train_1k.csv"
+
+    client = storage.Client()
+    bucket = client.bucket(BUCKET_NAME)
+
+    blob = bucket.blob(storage_filename)
+    blob.download_to_filename(local_filename)
