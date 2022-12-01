@@ -1,49 +1,28 @@
 import numpy as np
 
-from tensorflow.keras import models, layers
 from tensorflow.keras.callbacks import EarlyStopping
+from tensorflow.keras.layers import Dense, Dropout, BatchNormalization
+from tensorflow.keras.optimizers import Adamax
+from tensorflow.keras import regularizers
+from tensorflow.keras.models import Model
+from tensorflow.keras import applications
 
 
-def initialize_model(metrics = ['accuracy'], loss = 'categorical_crossentropy'):
+def initialize_model(metrics = ['accuracy'], loss = 'categorical_crossentropy', learning_rate = 0.001):
     '''Initialize a model'''
 
-    model = models.Sequential()
+    base_model = applications.efficientnet.EfficientNetB3(include_top = False, weights = "imagenet", input_shape = (100, 100, 3), pooling = 'max')
 
-    ### First Convolution & MaxPooling
-    model.add(layers.Conv2D(32,(3,3), activation='relu',padding='same',input_shape=(100,100,3)))
-    model.add(layers.Conv2D(32,(3,3), activation='relu',padding='same'))
-    model.add(layers.MaxPool2D(pool_size=(2,2)))
-    model.add(layers.Dropout(0.2))
+    base_model.trainable = True
+    x = base_model.output
 
-    ### Second Convolution & MaxPooling
-    model.add(layers.Conv2D(16, (3,3), activation='relu', padding='same'))
-    model.add(layers.Conv2D(16, (3,3), activation='relu', padding='same'))
-    model.add(layers.MaxPool2D(pool_size=(2,2)))
-    model.add(layers.Dropout(0.2))
-
-    ### Third Convolution & MaxPooling
-    model.add(layers.Conv2D(16, (3,3), activation='relu', padding='same'))
-
-    model.add(layers.Conv2D(16, (3,3), activation='relu', padding='same'))
-    model.add(layers.MaxPool2D(pool_size=(2,2)))
-    model.add(layers.Dropout(0.2))
-
-    #Flattening the model
-    model.add(layers.Flatten())
-
-    #One more dropout layer with the respective dense layer to combine everything
-
-    model.add(layers.Dense(64, activation='relu'))
-    model.add(layers.Dropout(0.2))
-
-
-    ### Last layer - Classification Layer with 9 outputs corresponding to 9 mushrooms labels
-    model.add(layers.Dense(9,activation='softmax'))
-
-    ### Model compilation
-    model.compile(loss = loss,
-                  optimizer = 'adam',
-                  metrics = metrics)
+    x = BatchNormalization(axis = -1, momentum = 0.99, epsilon = 0.001 )(x)
+    x = Dense(256, kernel_regularizer = regularizers.l2(l = 0.016),activity_regularizer=regularizers.l1(0.006),
+                    bias_regularizer = regularizers.l1(0.006), activation = 'relu')(x)
+    x = Dropout(rate = .4, seed=123)(x)
+    output = Dense(9, activation='softmax')(x)
+    model = Model(inputs=base_model.input, outputs=output)
+    model.compile(Adamax(learning_rate = learning_rate), loss = loss, metrics = metrics)
 
     return model
 

@@ -70,10 +70,11 @@ def train() :
               'batch_size' : 16,
               'patience' : 10,
               'metrics' : ['accuracy'],
-              'loss' : 'categorical_crossentropy'
+              'loss' : 'categorical_crossentropy',
+              'learning_rate' : 0.001
              }
 
-    print("\n 🍄 Initializing model...\n")
+    print("\n 🍄 Getting data...\n")
 
     if DATA_LOAD == "local" :
 
@@ -88,7 +89,9 @@ def train() :
         print("\n❗️Data not loaded❗️\n 🍄 Only local source available for the moment.\n")
         return None
 
-    model = initialize_model(metrics = params['metrics'], loss = params["loss"])
+    print("\n 🍄 Initializing model...\n")
+
+    model = initialize_model(metrics = params['metrics'], loss = params["loss"], learning_rate = params["learning_rate"])
 
     print("\n 🍄 Training model...\n")
 
