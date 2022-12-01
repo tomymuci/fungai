@@ -1,7 +1,6 @@
 "this is where we are suppose to load the parameters from the .env and that we'll call in others files."
 
 import os
-import numpy as np
 
 LOCAL_DATA_PATH = os.path.expanduser(os.environ.get("LOCAL_DATA_PATH"))
 LOCAL_REGISTRY_PATH = os.path.expanduser(os.environ.get("LOCAL_REGISTRY_PATH"))

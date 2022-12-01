@@ -10,3 +10,9 @@ run_train:
 
 run_eval:
 	python -c 'from FungAI.interface.main import evaluate; evaluate();'
+
+run_api:
+	uvicorn FungAI.api.api:app --reload
+
+run_predict:
+	python -c 'from FungAI.interface.main import pred; pred();'
