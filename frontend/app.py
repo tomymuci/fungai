@@ -125,7 +125,7 @@ url = 'http://localhost:8000/predict'
 
 params = {
     'new_image': None
- 
+
 }
 
 response = requests.get(url, params=params)

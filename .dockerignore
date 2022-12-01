@@ -1,0 +1,10 @@
+Dockerfile
+models
+
+FungAI.egg-info
+raw_data
+Analysis.ipynb
+test_adael.ipynb
+EfficientNetB3.ipynb
+
+*__pycache__
