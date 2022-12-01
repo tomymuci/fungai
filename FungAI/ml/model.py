@@ -58,7 +58,7 @@ def train_model(model, X: np.ndarray, y: np.ndarray, epochs = 5, batch_size = 16
 def evaluate_model(model, X: np.ndarray, y: np.ndarray, batch_size = 16) :
     '''Evaluate a model.'''
 
-    metrics = model.evaluate(x = X, y = y, batch_size = batch_size, verbose = 2, return_dict = True)
+    metrics = model.evaluate(x = X, y = y, batch_size = batch_size, verbose = 1, return_dict = True)
 
     return metrics
 

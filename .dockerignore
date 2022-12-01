@@ -1,0 +1,7 @@
+Dockerfile
+models
+processed
+FungAI.egg-info
+raw_data
+Analysis.ipynb
+test_adael.ipynb

@@ -3,14 +3,17 @@ import os
 import shutil
 from sklearn.preprocessing import LabelBinarizer
 from sklearn.model_selection import train_test_split
+import matplotlib.pyplot as plt
+import cv2
+from random import randint
 
 from FungAI.data_sources.load import load_local
-from FungAI.ml.model import initialize_model, train_model, evaluate_model
+from FungAI.ml.model import initialize_model, train_model, evaluate_model, predict_new
 from FungAI.ml.registry import save_model_local, load_model_local, save_model_mlflow, load_model_mlflow
 
 from FungAI.ml.params import LOCAL_DATA_PROCESSED_PATH, DATA_SOURCE, DATA_SAVE, DATA_LOAD, MODEL_SAVE, MODEL_LOAD
 
-def preprocessor(prediction = None) :
+def preprocessor() :
     '''Load the data (from local for now), preprocess it and save it.'''
 
 
@@ -66,7 +69,7 @@ def train() :
     params = {'epochs' : 100,
               'batch_size' : 16,
               'patience' : 10,
-              'metrics' : ['Accuracy'],
+              'metrics' : ['accuracy'],
               'loss' : 'categorical_crossentropy'
              }
 
@@ -148,11 +151,58 @@ def evaluate() :
     metrics = evaluate_model(model, X = X_test, y = y_test)
 
     loss = metrics["loss"]
-    accuracy = metrics["accuracy"]
+    accuracy = metrics["Accuracy"]
 
     print(f"\n 🍄 Model evaluated : loss {round(loss, 2)} accuracy {round(accuracy, 2)}")
 
     return metrics
 
-def pred(new_image) :
-    pass
+def pred(new_image = None) :
+
+    print("\n 🍄 Loading image...\n")
+
+    if new_image is None :
+        rdm_nb = randint(0, 3)
+        if rdm_nb == 0 :
+            img = plt.imread("FungAI/Agaricus_campestre.jpeg")
+            type = "Agaricus Campestre"
+        elif rdm_nb == 1 :
+            img = plt.imread("FungAI/amanita_muscaria.jpeg")
+            type = "Amanita Muscaria"
+        elif rdm_nb == 2 :
+            img = plt.imread("FungAI/boletus_edulis.jpeg")
+            type = "Boletus Edulis"
+    else :
+        img = plt.imread(new_image)
+
+    print("\n 🍄 Processing image...\n")
+
+    trans_img = cv2.resize(img, (100, 100), interpolation = cv2.INTER_AREA)
+    X = np.concatenate(trans_img, axis = 0).reshape((1, 100, 100, 3))
+
+    print("\n 🍄 Loading Model...\n")
+
+    if MODEL_LOAD == "local" :
+        model = load_model_local()
+    elif MODEL_LOAD == 'cloud' :
+        model = load_model_mlflow()
+    else :
+        print("\n❗️Model not loaded❗️\n")
+        return None
+
+    print("\n 🍄 Making a prediction...\n")
+
+    prediction = predict_new(model = model, X = X)[0]
+    labels = ['Agaricus', 'Amanita', 'Boletus', 'Cortinarius', 'Entoloma', 'Hygrocybe', 'Lactarius', 'Russula', 'Suillus']
+
+    print("\n 🍄 Got a prediction!\n")
+
+    genus = {}
+    for label, pred in zip(labels, prediction) :
+        genus[label] = f"{pred}"
+        print(f"{label} : {pred*100} %")
+
+    if new_image is None :
+        print(f"\n 🍄 It is suppose to be {type} 🙃\n")
+
+    return genus

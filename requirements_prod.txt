@@ -1,0 +1,12 @@
+numpy
+pandas
+seaborn
+scikit-learn
+matplotlib
+opencv-python
+Pillow
+mlflow~=1.26.1
+google-cloud-bigquery<3.0.0
+google-cloud-storage
+fastapi
+uvicorn

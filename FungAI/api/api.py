@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from FungAI.interface.main import evaluate
+from FungAI.interface.main import evaluate, pred
 
 
 app = FastAPI()
@@ -19,12 +19,13 @@ def root() :
     return {"Is it working ?" : True}
 
 @app.get("/evaluate")
-def evaluate() :
+def eval() :
     metrics = evaluate()
-    return dict(Loss = float(metrics["loss"]), Accuracy = float(metrics["accuracy"]))
+    return dict(Loss = float(metrics["loss"]), Accuracy = float(metrics["Accuracy"]))
 
 @app.get("/predict")
 def predict() :
-    pred = pred()
 
-    return {"genus" : pred}
+    prediction = pred()
+
+    return {"genuses" : prediction}
