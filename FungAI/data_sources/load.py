@@ -1,8 +1,6 @@
-import matplotlib.pyplot as plt
 import numpy as np
 import os
-import cv2
-from PIL import ImageFile
+from PIL import ImageFile, Image
 ImageFile.LOAD_TRUNCATED_IMAGES = True # important to avoid an error (the truncated picture error)
 from google.cloud import storage
 
@@ -18,10 +16,10 @@ def load_local() :
     idx = 0
     for genus in os.listdir(LOCAL_DATA_PATH):
         for image in os.listdir(f"{LOCAL_DATA_PATH}/{genus}"):
-            temp_img = plt.imread(os.path.join(LOCAL_DATA_PATH, genus, image))
+            temp_img = Image.open(os.path.join(LOCAL_DATA_PATH, genus, image))
             if len(temp_img.shape) < 3 : # necessary because there is an image that has no RGB dimension (wtf ??)
                     continue
-            trans_img = cv2.resize(temp_img, (100, 100), interpolation = cv2.INTER_AREA) # normlizing the pixels of images
+            trans_img = np.ndarray(temp_img.resize((100, 100))) # normlizing the pixels of images
             _X.append(trans_img)
             _y.append(genus)
             idx += 1
