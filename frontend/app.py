@@ -4,6 +4,7 @@ import pandas as pd
 import base64
 import random
 import json
+import requests
 from google.oauth2 import service_account
 from google.cloud import storage
 from io import StringIO
@@ -54,7 +55,7 @@ def add_bg_from_local(image_file):
     """,
     unsafe_allow_html=True
     )
-add_bg_from_local('images_for_app/background2.jpg')
+add_bg_from_local('frontend/images_for_app/background2.jpg')
 
 
 # This is creating the picture upload button
@@ -83,15 +84,15 @@ with st.expander("see additional information"):
 col1, col2, col3 = st.columns(3)
 with col1:
         st.header("Amanita Bisporigera")
-        image1 = Image.open(f'images_for_app/genus_pictures/{predicted_genus}/amanita_bisporigera.jpeg')
+        image1 = Image.open(f'frontend/images_for_app/genus_pictures/{predicted_genus}/amanita_bisporigera.jpeg')
         st.image(image1, width=250)
 with col2:
         st.header("Amanita Caesarea")
-        image2 = Image.open(f'images_for_app/genus_pictures/{predicted_genus}/amanita_caesarea.jpeg')
+        image2 = Image.open(f'frontend/images_for_app/genus_pictures/{predicted_genus}/Amanita_caesarea.jpeg')
         st.image(image2, width=250)
 with col3:
         st.header("Amanita Muscaria")
-        image3 = Image.open(f'images_for_app/genus_pictures/{predicted_genus}/amanita_muscaria.jpeg')
+        image3 = Image.open(f'frontend/images_for_app/genus_pictures/{predicted_genus}/amanita_muscaria.jpeg')
         st.image(image3, width=250)
 
 st.write()
@@ -104,13 +105,13 @@ col1, col2, col3 = st.columns(3)
 
 with col1:
         st.header("Recipe 1")
-        image = Image.open("images_for_app/recipe1_amanita.png")
+        image = Image.open("frontend/images_for_app/recipe1_amanita.png")
         st.image(image)
         st.markdown( all_mushroom_tables.get(predicted_genus).get(1),unsafe_allow_html=True)
 
 with col2:
         st.header("Recipe 2")
-        image = Image.open("images_for_app/recipe2_amanita.png")
+        image = Image.open("frontend/images_for_app/recipe2_amanita.png")
         st.image(image)
         st.markdown( all_mushroom_tables.get(predicted_genus).get(2),unsafe_allow_html=True)
 
@@ -125,7 +126,6 @@ url = 'http://localhost:8000/predict'
 
 params = {
     'new_image': None
-
 }
 
 response = requests.get(url, params=params)

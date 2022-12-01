@@ -165,7 +165,7 @@ def pred(new_image = None) :
 
     print("\n 🍄 Loading image...\n")
 
-    img = None
+    # img = None
 
     if new_image is None :
         rdm_nb = randint(0, 3)
@@ -178,8 +178,7 @@ def pred(new_image = None) :
         elif rdm_nb == 2 :
             img = Image.open("FungAI/boletus_edulis.jpeg")
             type = "Boletus Edulis"
-    else :
-        img = Image.open(new_image)
+
 
     print("\n 🍄 Processing image...\n")
 
