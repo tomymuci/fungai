@@ -10,9 +10,11 @@ from io import StringIO
 import io
 from PIL import Image
 import matplotlib.pyplot as plt
-from data import *
+from data import all_mushroom_tables, all_info_tables
+import os
+
 st.set_page_config(layout="wide")
-predicted_genus = "Amanita"
+predicted_genus = "Boletus"
 
 
 # This is creating the headlines
@@ -71,28 +73,34 @@ if uploaded_file is not None:
 
     # Print additional information button
 
-    # add code
-
-
 with st.expander("see additional information"):
     #html_string = "<p>style=“background-color:#0066cc;color:#33ff33;font-size:24px;border-radius:2%;“</p>"
    # st.markdown(html_string, unsafe_allow_html=True)
     st.markdown(all_info_tables.get(predicted_genus),
                     unsafe_allow_html=True)
 
+
 col1, col2, col3 = st.columns(3)
+dir_gens = f'images_for_app/Genus pictures/{predicted_genus}'
+images = os.listdir(dir_gens)
+
 with col1:
-        st.header("Amanita Bisporigera")
-        image1 = Image.open(f'images_for_app/genus_pictures/{predicted_genus}/amanita_bisporigera.jpeg')
-        st.image(image1, width=250)
+    image_name = images[0].replace('.jpeg', '').replace('_', ' ').title()
+    st.header(f"{image_name}")
+
+    image1 = Image.open(os.path.join(dir_gens, images[0]))
+    st.image(image1, width=250)
+
 with col2:
-        st.header("Amanita Caesarea")
-        image2 = Image.open(f'images_for_app/genus_pictures/{predicted_genus}/amanita_caesarea.jpeg')
-        st.image(image2, width=250)
+    image_name = images[1].replace('.jpeg', '').replace('_', ' ').title()
+    st.header(f"{image_name}")
+    image1 = Image.open(os.path.join(dir_gens, images[1]))
+    st.image(image1, width=250)
 with col3:
-        st.header("Amanita Muscaria")
-        image3 = Image.open(f'images_for_app/genus_pictures/{predicted_genus}/amanita_muscaria.jpeg')
-        st.image(image3, width=250)
+    image_name = images[2].replace('.jpeg', '').replace('_', ' ').title()
+    st.header(f"{image_name}")
+    image1 = Image.open(os.path.join(dir_gens, images[2]))
+    st.image(image1, width=250)
 
 st.write()
 
@@ -101,32 +109,36 @@ st.write()
 # recipes_button = st.button("Reveal recipes")
 # choices = st.radio( "Which recipes do u want?" )
 col1, col2, col3 = st.columns(3)
+dir_recs = f'images_for_app/Recipe images/{predicted_genus}'
+images = os.listdir(dir_recs)
 
 with col1:
         st.header("Recipe 1")
-        image = Image.open("images_for_app/recipe1_amanita.png")
-        st.image(image)
-        st.markdown( all_mushroom_tables.get(predicted_genus).get(1),unsafe_allow_html=True)
+        image1 = Image.open(os.path.join(dir_recs, images[0]))
+        st.image(image1)
+        st.markdown(all_mushroom_tables.get(predicted_genus).get(1),unsafe_allow_html=True)
 
 with col2:
         st.header("Recipe 2")
-        image = Image.open("images_for_app/recipe2_amanita.png")
-        st.image(image)
+        image1 = Image.open(os.path.join(dir_recs, images[1]))
+        st.image(image1)
         st.markdown( all_mushroom_tables.get(predicted_genus).get(2),unsafe_allow_html=True)
 
 with col3:
         st.header("Recipe 3")
+        image1 = Image.open(os.path.join(dir_recs, images[3]))
+        st.image(image1)
         st.markdown( all_mushroom_tables.get(predicted_genus).get(3),unsafe_allow_html=True)
 
 
 
 
-url = 'http://localhost:8000/predict'
+# url = 'http://localhost:8000/predict'
 
-params = {
-    'new_image': None
+# params = {
+#     'new_image': None
 
-}
+# }
 
-response = requests.get(url, params=params)
-response.json() #=> {wait: 64}
+# response = requests.get(url, params=params)
+# response.json() #=> {wait: 64}

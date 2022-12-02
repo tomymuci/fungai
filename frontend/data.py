@@ -18,7 +18,7 @@ all_mushroom_tables = {
                     <li>Sear the mushrooms</li>
                     <li>Season with a pinch of salt</li>
                     <li>Sprinkle parsley on top</li>
-                    <li>Arrange and enjoy</li>
+                    <li>Arrange and enjoy!</li>
                 </ul>
             </li>
         </ul>
@@ -32,6 +32,7 @@ all_mushroom_tables = {
                 <li>1/2 tbsp caraway seed</li>
                 <li>salt</li>
                 <li>parsley or chives for garnish (chopped) (optional)</li>
+                </ul>
             </li>
         <li>INSTRUCTIONS
                 <ul>
@@ -53,17 +54,77 @@ all_mushroom_tables = {
     </div>""" }
         ,
 
-"Boletus": {1 :  """<ul>
-                    <li> mushrooms :mushroom: - 14 oz (400 g) boletus </li>
-                    <li> rice :rice_ball: - 1 1/2 cups
-                    <li> leeks - 1 sprig </li>
-                    <li> white wine :wine_glass: - 2/5 cup (100 ml)  </li>
-                    <li> salt :salt: </li>
-                    <li> black pepper </li>
-                    <li> white pepper </li>
-                    <li> nutmeg - 1/2 tsp </li>
-                    </ul>"""}
-}
+"Boletus": {1 :  """<div class='info'>
+                    <ul>
+                    <li>INGREDIENTS
+                    <ul>
+                    <li>500 g porcini mushrooms</li>
+                    <li>1 onion</li>
+                    <li>3 cloves of garlic</li>
+                    <li>olive oil</li>
+                    <li>400 g risotto rice</li>
+                    <li>200ml white wine</li>
+                    <li>750 ml vegetable stock</li>
+                    <li>salt, pepper</li>
+                    <li>150g Parmesan</li>
+                    <li>1 tbsp (fresh) parsley</li>
+                    </ul>
+                    </li>
+                    <li>INSTRUCTIONS
+                    <ul>
+                    <li>Clean the mushrooms and cut into fine slices.</li>
+                    <li>Chop the onion finely and sauté in olive oil for about 4 minutes.</li>
+                    <li>Finely chop the garlic and add to the onions after about 3 minutes and fry briefly.</li>
+                    <li>Stir in the risotto rice, salt and a little pepper and sauté briefly.</li>
+                    <li>Pour in the white wine and bring to the boil, stirring constantly.</li>
+                    <li>Gradually pour in the soup and stir in so that the rice is always just covered.</li>
+                    <li>The mushrooms are sautéed in olive oil for 5 to 10 minutes until golden brown and are stirred into the risotto together with the freshly chopped parsley 5 minutes before the end.</li>
+                    <li>Shortly before the end you can then decide whether you would prefer the risotto to be more liquid or firm.</li>
+                    <li>The final step is to stir in most of the parmesan.</li>
+                    <li>To serve you can hold back a little parmesan and sprinkle over the finished dish.</li>
+                    </ul>
+                    </li>
+                        </ul>"""
+,
+        2: """<div class='info'>
+                    <ul>
+                    <li>INGREDIENTS
+                    <ul>
+                    <li>2 ounces Dried Porcini Mushrooms</li>
+                    <li> 3 tablespoons Unsalted Butter</li>
+                    <li>1 Medium Onion, minced</li>
+                    <li>1 teaspoon Salt</li>
+                    <li>¼ teaspoon Freshly Ground Black Pepper</li>
+                    <li>¼ cup Heavy Cream</li>
+                    <li>1 pound Pasta</li>
+                    <li>½ cup Freshly Grated Parmesan Cheese, plus more to taste</li>
+                    </ul>
+                    </li>
+                    <li>INSTRUCTIONS
+                    <ul>
+                    <li>Bring 4 quarts of salted water to boil in a large pot for cooking the pasta.</li>
+                    <li>Place the porcini mushrooms in a small bowl and cover them with 2 cups of hot water.<li/>
+                    Soak for 20 minutes. Carefully lift the mushrooms from the liquid and pick through
+                    them to remove any foreign debris. Chop the mushrooms, Strain the soaking liquid
+                    through a colander lined with paper towels. Reserve the porcini mushrooms and the
+                    strained soaking liquid separately.</li>
+                    <li>Melt the butter in a large skillet. When the butter foams,
+                    add the onions and saute over medium heat until they are just beginning to
+                    brown around the edges, about 7 minutes.</li>
+                    <li>Add the chopped porcini mushrooms, salt, and pepper to the pan and cook for 2 minutes.
+                    Add the porcini soaking liquid and simmer briskly until the liquid has been reduced
+                    by half, about 10 minutes. The sauce should no longer be soupy, but don't reduce
+                    the sauce so much that the pan becomes dry.</li>
+                    <li>Stir the cream into the pan and simmer just until the sauce thickens, about 2 minutes.
+                    Taste for salt and pepper and adjust the seasonings if necessary.</li>
+                    <li>While preparing the sauce, cook and drain the pasta. Toss the hot pasta
+                    with the mushroom sauce and ½ cup grated Parmesan. Mix well and transfer portions to
+                    warm pasta bowls. Serve immediately with more grated cheese passed separately.</li>
+                    </ul>
+                    </li>
+                    </ul>
+                    </div>"""
+}}
 
 
 all_info_tables = {
@@ -140,15 +201,28 @@ all_info_tables = {
     ,
 
     "Russula":
-    """
+    """The Russula genus is one of the most common and easily recognizable mushroom
+    genres in the world. There are over 750 different species, with many of them
+    having large and bright fruiting bodies. They are particularly known in the
+    mycology world for having incredibly brittle gills that break easily, giving
+    them the nickname brittle gills. While it is very easy to recognize a member
+    of the Russula genus, it is incredibly difficult to recognize specific species
+    without the aid of microscopic analysis and flavor analysis
+    (mild to bitter taste, or mild to acrid flavor).
+
     """
 
     ,
 
         "Suillius":
-    """
+    """Suillius is a subgenre of the Boletus family. Suillius and Boletus share
+    many of the same characteristics, most noticeably the lack of gills for
+    sponge-like Hymenial pores. They are known for their notoriously slimy caps,
+    and have been nicknamed slippery jacks. Some Suillus species are edible,
+    and are commonly consumed in Slavic countries where they are generally referred
+    to as butter mushrooms. In some species, the slimy coat on the cap can act as a
+    purgative, and must be removed before consumption.
     """
 
 
     }
-
