@@ -16,3 +16,6 @@ run_api:
 
 run_predict:
 	python -c 'from FungAI.interface.main import pred; pred();'
+
+streamlit:
+	-@streamlit run frontend/app.py

@@ -4,6 +4,7 @@ import pandas as pd
 import base64
 import random
 import json
+import requests
 from google.oauth2 import service_account
 from google.cloud import storage
 from io import StringIO
@@ -56,7 +57,7 @@ def add_bg_from_local(image_file):
     """,
     unsafe_allow_html=True
     )
-add_bg_from_local('images_for_app/background2.jpg')
+add_bg_from_local('frontend/images_for_app/background2.jpg')
 
 
 # This is creating the picture upload button
@@ -134,6 +135,7 @@ with col3:
 
 
 # url = 'http://localhost:8000/predict'
+
 
 # params = {
 #     'new_image': None
