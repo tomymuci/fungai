@@ -19,7 +19,7 @@ def initialize_model(metrics = ['accuracy'], loss = 'categorical_crossentropy', 
     x = BatchNormalization(axis = -1, momentum = 0.99, epsilon = 0.001 )(x)
     x = Dense(256, kernel_regularizer = regularizers.l2(l = 0.016),activity_regularizer=regularizers.l1(0.006),
                     bias_regularizer = regularizers.l1(0.006), activation = 'relu')(x)
-    x = Dropout(rate = .4, seed=123)(x)
+    x = Dropout(rate = .4, seed = 123)(x)
     output = Dense(9, activation='softmax')(x)
     model = Model(inputs=base_model.input, outputs=output)
     model.compile(Adamax(learning_rate = learning_rate), loss = loss, metrics = metrics)
@@ -29,7 +29,12 @@ def initialize_model(metrics = ['accuracy'], loss = 'categorical_crossentropy', 
 def train_model(model, X: np.ndarray, y: np.ndarray, epochs = 5, batch_size = 16, patience = 1, validation_split = 0.2) :
     '''Train a model.'''
 
-    es = EarlyStopping(patience = patience, restore_best_weights = True)
+    es = EarlyStopping(monitor = 'val_accuracy',
+                       mode = 'max',
+                       patience = patience,
+                       verbose = 1,
+                       restore_best_weights = True)
+
     history = model.fit(X, y, batch_size = batch_size, epochs = epochs, callbacks = [es], verbose = 1, validation_split = validation_split)
 
     return model, history

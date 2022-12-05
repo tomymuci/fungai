@@ -65,9 +65,9 @@ def preprocessor() :
 def train() :
     '''Train a model with the saved data.'''
 
-    params = {'epochs' : 100,
+    params = {'epochs' : 1,
               'batch_size' : 16,
-              'patience' : 10,
+              'patience' : 5,
               'metrics' : ['accuracy'],
               'loss' : 'categorical_crossentropy',
               'learning_rate' : 0.001
