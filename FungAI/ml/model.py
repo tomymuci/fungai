@@ -29,7 +29,7 @@ def initialize_model(metrics = ['accuracy'], loss = 'categorical_crossentropy', 
 def train_model(model, X: np.ndarray, y: np.ndarray, epochs = 5, batch_size = 16, patience = 1, validation_split = 0.2) :
     '''Train a model.'''
 
-    es = EarlyStopping(patience = patience, restore_best_weights = True)
+    es = EarlyStopping(patience = patience, monitor="val_accuracy" , restore_best_weights = True)
     history = model.fit(X, y, batch_size = batch_size, epochs = epochs, callbacks = [es], verbose = 1, validation_split = validation_split)
 
     return model, history
