@@ -165,24 +165,24 @@ def pred(new_image = None) :
 
     print("\n 🍄 Loading image...\n")
 
-    # img = None
-
     if new_image is None :
+        print("\ngot no images, will load a random local image for tests\n")
         rdm_nb = randint(0, 3)
+
         if rdm_nb == 0 :
-            img = Image.open("FungAI/Agaricus_campestre.jpeg")
+            new_image = Image.open("FungAI/Agaricus_campestre.jpeg")
             type = "Agaricus Campestre"
         elif rdm_nb == 1 :
-            img = Image.open("FungAI/amanita_muscaria.jpeg")
+            new_image = Image.open("FungAI/amanita_muscaria.jpeg")
             type = "Amanita Muscaria"
         elif rdm_nb == 2 :
-            img = Image.open("FungAI/boletus_edulis.jpeg")
+            new_image = Image.open("FungAI/boletus_edulis.jpeg")
             type = "Boletus Edulis"
 
 
     print("\n 🍄 Processing image...\n")
 
-    trans_img = np.array(img.resize((100, 100)))
+    trans_img = np.array(new_image.resize((100, 100)))
     X = np.concatenate(trans_img, axis = 0).reshape((1, 100, 100, 3))
 
     print("\n 🍄 Loading Model...\n")
