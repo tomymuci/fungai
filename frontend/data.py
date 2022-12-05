@@ -2,52 +2,7 @@ all_mushroom_tables = {
     "Amanita":
             {1: """<div class='info'>
             <ul>
-            <li>INGREDIENTS
-                    <ul>
-                    <li>300g fresh caesar mushrooms</li>
-                    <li>olive oil (alternatively butter)</li>
-                    <li>salt 🧂</li>
-                    <li>parsley</li>
-                    </ul>
-            </li>
-        <li>INSTRUCTIONS
-                <ul>
-                    <li>Clean the fresh mushrooms carefully as described above</li>
-                    <li>Cut into fine slices</li>
-                    <li>Heat oil (or butter) in a pan</li>
-                    <li>Sear the mushrooms</li>
-                    <li>Season with a pinch of salt</li>
-                    <li>Sprinkle parsley on top</li>
-                    <li>Arrange and enjoy!</li>
-                </ul>
-            </li>
-        </ul>
-    </div>""",
-    2: """<div class='info'>
-            <ul>
-            <li>INGREDIENTS
-                    <ul>
-                <li>400 g (14 oz)  blushers (cleaned)</li>
-                <li>2 tbsp canola oil</li>
-                <li>1/2 tbsp caraway seed</li>
-                <li>salt</li>
-                <li>parsley or chives for garnish (chopped) (optional)</li>
-                </ul>
-            </li>
-        <li>INSTRUCTIONS
-                <ul>
-<li>Clean the blushers.</li>
-<li>Brush off any dirt, peel the caps (start at the edges) and separate caps from stipes.</li>
-<li>Halve stipes.</li>
-<li>In a large skillet over medium heat, heat 2 tbsp canola oil.</li>
-
-<li>Add blushers in a single layer and season with salt and caraway seed.</li>
-<li>Sauté for about 3-5 minutes per side without stirring, until slightly browned.</li>
-<li>After both sides are browned, stir and sauté for another 2-3 minutes.</li>
-<li>Depending on the size of your pan, you might need to sauté in batches.</li>
-<li>Season with more salt to taste and top with parsley or chives before serving, if desired.</li>
-<li>Serve with some delicious bread.</li>
-<li>Enjoy!</li>
+            <li>Better don't touch that stuff!
                 </ul>
             </li>
         </ul>
@@ -58,11 +13,11 @@ all_mushroom_tables = {
                     <ul>
                     <li>INGREDIENTS
                     <ul>
-                    <li>500 g porcini mushrooms</li>
-                    <li>1 onion</li>
-                    <li>3 cloves of garlic</li>
+                    <li>500 g porcini mushrooms🍄</li>
+                    <li>1 onion 🧅</li>
+                    <li>3 cloves of garlic🧄</li>
                     <li>olive oil</li>
-                    <li>400 g risotto rice</li>
+                    <li>400 g risotto rice 🌾</li>
                     <li>200ml white wine</li>
                     <li>750 ml vegetable stock</li>
                     <li>salt, pepper</li>
@@ -90,13 +45,13 @@ all_mushroom_tables = {
                     <ul>
                     <li>INGREDIENTS
                     <ul>
-                    <li>2 ounces Dried Porcini Mushrooms</li>
-                    <li> 3 tablespoons Unsalted Butter</li>
-                    <li>1 Medium Onion, minced</li>
-                    <li>1 teaspoon Salt</li>
+                    <li>2 ounces Dried Porcini Mushrooms🍄</li>
+                    <li> 3 tablespoons Unsalted Butter 🧈</li>
+                    <li>1 Medium Onion, minced 🧅 </li>
+                    <li>1 teaspoon Salt 🧂</li>
                     <li>¼ teaspoon Freshly Ground Black Pepper</li>
-                    <li>¼ cup Heavy Cream</li>
-                    <li>1 pound Pasta</li>
+                    <li>¼ cup Heavy Cream </li>
+                    <li>1 pound Pasta 🍝</li>
                     <li>½ cup Freshly Grated Parmesan Cheese, plus more to taste</li>
                     </ul>
                     </li>
@@ -124,12 +79,71 @@ all_mushroom_tables = {
                     </li>
                     </ul>
                     </div>"""
+},
+
+"Lactarius": {1 :  """<div class='info'>
+                    <ul>
+                    <li>INGREDIENTS
+                    <ul>
+                    <li>8 oz fresh saffron milkcaps sliced if large, left whole if small</li>
+                    <li>½ cup chopped peeled tomatoes</li>
+                    <li>4 oz bulk chorizo sausage</li>
+                    <li>2 tablespoons chopped flat leaf parsley</li>
+                    <li>1 teaspoon chopped fresh garlic</li>
+                    <li>Kosher salt and pepper to taste</li>
+                    <li>2 tablespoon extra virgin olive oil for garnishing preferably a peppery Spanish variety (optional)</li>
+                    <li>High quality bread crust removed and toasted</li>
+                    </ul>
+                    </li>
+                    <li>INSTRUCTIONS
+                    <ul>
+                    <li>In a large saute pan, render the fat from the chorizo and brown it lightly. With a slotted spoon, remove the chorizo, leaving the fat in the pan.</li>
+                    <li>Reserve the chorizo until needed.</li>
+                    <li>Heat the remaining fat and add the saffron milkcaps. Cook the saffron milkcaps on medium-high heat until lightly browned and caramelized, about 5 minutes. Season the mushrooms lightly with salt.</li>
+                    <li>Add the garlic, stir and cook for 1 minute. Add the tomatoes, reserved chorizo and parsley and cook for 5 minutes more. Double check the seasoning for salt and pepper, then serve immediately on toast garnished with a drizzle of the olive oil.</li>
+                    </ul>
+                    </li>
+                        </ul>"""
+,
+        2: """<div class='info'>
+                    <ul>
+                    <li>INGREDIENTS
+                    <ul>
+                    <li>500 g saffron milk cap mushrooms, cleaned and sliced</li>
+                    <li>25 g butter</li>
+                    <li>1 Tbsp olive oil, (or 2.5 Tbsp if omitting butter)</li>
+                    <li>2 cloves garlic, finely chopped</li>
+                    <li>1 brown onion, diced</li>
+                    <li>1.5 cups arborio rice, (this was 300g for me), rinsed really well</li>
+                    <li>100 ml dry white wine</li>
+                    <li>5.5 cups vegetable stock</li>
+                    <li>2 cups baby spinach</li>
+                    <li>60 g goats cheese (optional)</li>
+                    <li>Big handful of thyme, leaves only, chopped</li>
+                    <li>Salt and pepper to taste, (be generous)</li>
+                    </ul>
+                    </li>
+                    <li>INSTRUCTIONS
+                    <ul>
+                    <li>Put the vegetable stock on the stove to start heating through. You want it hot, just simmering but not boiling</li>
+                    <li>Melt the butter and 1 tsp of the olive oil in a frypan over medium/high heat until the butter foams (use 1.5 Tbsp of oil if not using butter)</li>
+                    <li>Add the mushrooms, season with a little salt and pepper and cook for 3-4 minutes until the colour is deep and golden. If your frypan isn’t big enough to take them all in one batch without crowding them, cook them in two lots with half the butter and oil in each. Set aside the mushrooms once cooked</li>
+                    <li>Heat a heavy-based saucepan (I used my Le Creuset pot) over a medium heat and add the remaining oil. Once it has heated through, add the onion and garlic. Fry for 5-6 minutes or until softened and translucent</li>
+                    <li>Add the rice and stir through for a minute or two until it is coated with the oil and becomes shiny</li>
+                    <li>Add the wine and stir until completely absorbed then add a ladle of the warmed stock and stir occasionally until fully absorbed</li>
+                    <li>Keep adding the stock one ladle at a time and stirring occasionally until each is absorbed to ensure the rice cooks through evenly</li>
+                    <li>Once all the stock has been used and the rice is cooked, season with salt and pepper then stir through the baby spinach. Once this has wilted, stir through the thyme and cooked mushrooms to reheat then add the goats cheese if using just before serving</li>
+                    <li>Serve with an extra drizzle of olive oil and a green salad.</li>
+                    </ul>
+                    </li>
+                    </ul>
+                    </div>"""
 }}
 
 
 all_info_tables = {
     "Amanita":
-    """ The Amanita genus is by far the most recognized genus of mushrooms in the world.
+    """ ☠️☠️☠️The Amanita genus is by far the most recognized genus of mushrooms in the world.
     There are over 600 different species of Amanitas, with a few being edible and many
     of them notoriously toxic. The Amanita Genus is responsible for 95% of fatalities
     resulting from mushroom poisonings across the world - with 50% coming from
@@ -140,7 +154,7 @@ all_info_tables = {
 
 """
 ,
-    "Boletus":
+    "Lactarius":
     """The Boletus genus is characterized by its lack of gills.
     Instead, below the cap is a sponge-like flesh called Hymenial pores.
     The Boletus genus are ectomycorrhizal fungi, forming symbiotic relationships between
@@ -190,7 +204,7 @@ all_info_tables = {
 
     ,
 
-    "Lactarius ":
+    "Lactarius":
     """The Lactarius genus is well known in the culinary world for its delicious Lactarius
     Deliciosi, also known as the Saffron Milk Cap. The genus is characterized by
     the milk-like fluid that is secreted from the gills when cut or damaged.
