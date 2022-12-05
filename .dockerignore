@@ -1,7 +1,12 @@
 Dockerfile
 models
-processed
-FungAI.egg-info
 raw_data
+frontend
+
+FungAI.egg-info
+
 Analysis.ipynb
 test_adael.ipynb
+EfficientNetB3.ipynb
+
+*__pycache__

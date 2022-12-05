@@ -3,9 +3,8 @@ import os
 import shutil
 from sklearn.preprocessing import LabelBinarizer
 from sklearn.model_selection import train_test_split
-import matplotlib.pyplot as plt
-import cv2
 from random import randint
+from PIL import Image
 
 from FungAI.data_sources.load import load_local
 from FungAI.ml.model import initialize_model, train_model, evaluate_model, predict_new
@@ -128,7 +127,7 @@ def train() :
 def evaluate() :
     '''Evaluate a model with a saved model.'''
 
-    print("\n 🍄 Loading model and data...\n")
+    print("\n 🍄 Loading model...\n")
 
     if MODEL_LOAD == "local" :
         model = load_model_local()
@@ -141,6 +140,8 @@ def evaluate() :
     if model is None :
         print("\n❗️There is no saved model❗️\n 🍄 Run training first or change the loading parameters.\n")
         return None
+
+    print("\n 🍄 Loading data...\n")
 
     if DATA_LOAD == 'local' :
         X_test = np.load(f"{LOCAL_DATA_PROCESSED_PATH}/X_test.npy")
@@ -165,22 +166,23 @@ def pred(new_image = None) :
     print("\n 🍄 Loading image...\n")
 
     if new_image is None :
+        print("\ngot no images, will load a random local image for tests\n")
         rdm_nb = randint(0, 3)
+
         if rdm_nb == 0 :
-            img = plt.imread("FungAI/Agaricus_campestre.jpeg")
+            new_image = Image.open("FungAI/Agaricus_campestre.jpeg")
             type = "Agaricus Campestre"
         elif rdm_nb == 1 :
-            img = plt.imread("FungAI/amanita_muscaria.jpeg")
+            new_image = Image.open("FungAI/amanita_muscaria.jpeg")
             type = "Amanita Muscaria"
         elif rdm_nb == 2 :
-            img = plt.imread("FungAI/boletus_edulis.jpeg")
+            new_image = Image.open("FungAI/boletus_edulis.jpeg")
             type = "Boletus Edulis"
-    else :
-        img = plt.imread(new_image)
+
 
     print("\n 🍄 Processing image...\n")
 
-    trans_img = cv2.resize(img, (100, 100), interpolation = cv2.INTER_AREA)
+    trans_img = np.array(new_image.resize((100, 100)))
     X = np.concatenate(trans_img, axis = 0).reshape((1, 100, 100, 3))
 
     print("\n 🍄 Loading Model...\n")

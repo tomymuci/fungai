@@ -24,8 +24,8 @@ def eval() :
     return dict(Loss = float(metrics["loss"]), Accuracy = float(metrics["Accuracy"]))
 
 @app.get("/predict")
-def predict() :
+def predict(image = None) :
 
-    prediction = pred()
+    prediction = pred(new_image=image)
 
     return {"genuses" : prediction}
