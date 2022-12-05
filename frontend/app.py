@@ -15,7 +15,6 @@ from data import all_mushroom_tables, all_info_tables
 import os
 
 st.set_page_config(layout="wide")
-predicted_genus = "Boletus"
 
 
 # This is creating the headlines
@@ -57,7 +56,7 @@ def add_bg_from_local(image_file):
     """,
     unsafe_allow_html=True
     )
-add_bg_from_local('frontend/images_for_app/background2.jpg')
+add_bg_from_local('images_for_app/background2.jpg')
 
 
 # This is creating the picture upload button
@@ -72,75 +71,72 @@ if uploaded_file is not None:
     ax.imshow(image , cmap = "gray")
     st.pyplot(fig)
 
-    # Print additional information button
+# Print additional information button
 
-with st.expander("see additional information"):
-    #html_string = "<p>style=“background-color:#0066cc;color:#33ff33;font-size:24px;border-radius:2%;“</p>"
-   # st.markdown(html_string, unsafe_allow_html=True)
-    st.markdown(all_info_tables.get(predicted_genus),
-                    unsafe_allow_html=True)
-
-
-col1, col2, col3 = st.columns(3)
-dir_gens = f'images_for_app/Genus pictures/{predicted_genus}'
-images = os.listdir(dir_gens)
-
-with col1:
-    image_name = images[0].replace('.jpeg', '').replace('_', ' ').title()
-    st.header(f"{image_name}")
-
-    image1 = Image.open(os.path.join(dir_gens, images[0]))
-    st.image(image1, width=250)
-
-with col2:
-    image_name = images[1].replace('.jpeg', '').replace('_', ' ').title()
-    st.header(f"{image_name}")
-    image1 = Image.open(os.path.join(dir_gens, images[1]))
-    st.image(image1, width=250)
-with col3:
-    image_name = images[2].replace('.jpeg', '').replace('_', ' ').title()
-    st.header(f"{image_name}")
-    image1 = Image.open(os.path.join(dir_gens, images[2]))
-    st.image(image1, width=250)
-
-st.write()
+if st.button('press') and uploaded_file is not None:
+    url = 'http://localhost:8000/predict'
+    params = {
+    'new_image': uploaded_file
+    }
+    response = requests.get(url, params=params)
+    genuses = response.json()['genuses']
+    predicted_genus = [key for key, value in genuses.items() if float(value)==1.0][0]
+    st.write(f'{predicted_genus}')
 
 
-    # Show receipes button
-# recipes_button = st.button("Reveal recipes")
-# choices = st.radio( "Which recipes do u want?" )
-col1, col2, col3 = st.columns(3)
-dir_recs = f'images_for_app/Recipe images/{predicted_genus}'
-images = os.listdir(dir_recs)
-
-with col1:
-        st.header("Recipe 1")
-        image1 = Image.open(os.path.join(dir_recs, images[0]))
-        st.image(image1)
-        st.markdown(all_mushroom_tables.get(predicted_genus).get(1),unsafe_allow_html=True)
-
-with col2:
-        st.header("Recipe 2")
-        image1 = Image.open(os.path.join(dir_recs, images[1]))
-        st.image(image1)
-        st.markdown( all_mushroom_tables.get(predicted_genus).get(2),unsafe_allow_html=True)
-
-with col3:
-        st.header("Recipe 3")
-        image1 = Image.open(os.path.join(dir_recs, images[3]))
-        st.image(image1)
-        st.markdown( all_mushroom_tables.get(predicted_genus).get(3),unsafe_allow_html=True)
+    with st.expander("see additional information"):
+        #html_string = "<p>style=“background-color:#0066cc;color:#33ff33;font-size:24px;border-radius:2%;“</p>"
+    # st.markdown(html_string, unsafe_allow_html=True)
+        st.markdown(all_info_tables.get(predicted_genus),
+                        unsafe_allow_html=True)
 
 
+    col1, col2, col3 = st.columns(3)
+    dir_gens = f'images_for_app/Genus pictures/{predicted_genus}'
+    images = os.listdir(dir_gens)
+
+    with col1:
+        image_name = images[0].replace('.jpeg', '').replace('_', ' ').title()
+        st.header(f"{image_name}")
+
+        image1 = Image.open(os.path.join(dir_gens, images[0]))
+        st.image(image1, width=250)
+
+    with col2:
+        image_name = images[1].replace('.jpeg', '').replace('_', ' ').title()
+        st.header(f"{image_name}")
+        image1 = Image.open(os.path.join(dir_gens, images[1]))
+        st.image(image1, width=250)
+    with col3:
+        image_name = images[2].replace('.jpeg', '').replace('_', ' ').title()
+        st.header(f"{image_name}")
+        image1 = Image.open(os.path.join(dir_gens, images[2]))
+        st.image(image1, width=250)
+
+    st.write()
 
 
-# url = 'http://localhost:8000/predict'
+        # Show receipes button
+    # recipes_button = st.button("Reveal recipes")
+    # choices = st.radio( "Which recipes do u want?" )
+    col1, col2 = st.columns(2)
+    dir_recs = f'images_for_app/Recipe images/{predicted_genus}'
+    images = os.listdir(dir_recs)
 
+    with col1:
+            st.header("Recipe 1")
+            image1 = Image.open(os.path.join(dir_recs, images[0]))
+            st.image(image1)
+            st.markdown(all_mushroom_tables.get(predicted_genus).get(1),unsafe_allow_html=True)
 
-# params = {
-#     'new_image': None
+    with col2:
+            st.header("Recipe 2")
+            image1 = Image.open(os.path.join(dir_recs, images[1]))
+            st.image(image1)
+            st.markdown( all_mushroom_tables.get(predicted_genus).get(2),unsafe_allow_html=True)
 
-# }
-
-# response = requests.get(url, params=params)
-# response.json() #=> {wait: 64}
+# with col3:
+#         st.header("Recipe 3")
+#         image1 = Image.open(os.path.join(dir_recs, images[3]))
+#         st.image(image1)
+#         st.markdown( all_mushroom_tables.get(predicted_genus).get(3),unsafe_allow_html=True)

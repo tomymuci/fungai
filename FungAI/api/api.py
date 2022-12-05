@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from FungAI.interface.main import evaluate, pred
-
+import os
 
 app = FastAPI()
 
@@ -24,8 +24,9 @@ def eval() :
     return dict(Loss = float(metrics["loss"]), Accuracy = float(metrics["Accuracy"]))
 
 @app.get("/predict")
-def predict() :
+def predict(new_image) :
 
-    prediction = pred()
+    print(os.getcwd())
+    prediction = pred(new_image=new_image)
 
     return {"genuses" : prediction}

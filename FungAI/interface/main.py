@@ -165,19 +165,19 @@ def pred(new_image = None) :
 
     print("\n 🍄 Loading image...\n")
 
-    # img = None
+    img = Image.open('/Users/leonardlink/code/tomymuci/fungai/FungAI/amanita_muscaria.jpeg')
 
-    if new_image is None :
-        rdm_nb = randint(0, 3)
-        if rdm_nb == 0 :
-            img = Image.open("FungAI/Agaricus_campestre.jpeg")
-            type = "Agaricus Campestre"
-        elif rdm_nb == 1 :
-            img = Image.open("FungAI/amanita_muscaria.jpeg")
-            type = "Amanita Muscaria"
-        elif rdm_nb == 2 :
-            img = Image.open("FungAI/boletus_edulis.jpeg")
-            type = "Boletus Edulis"
+    # if new_image is None :
+    #     rdm_nb = randint(0, 3)
+    #     if rdm_nb == 0 :
+    #         img = Image.open("FungAI/Agaricus_campestre.jpeg")
+    #         type = "Agaricus Campestre"
+    #     elif rdm_nb == 1 :
+    #         img = Image.open("FungAI/amanita_muscaria.jpeg")
+    #         type = "Amanita Muscaria"
+    #     elif rdm_nb == 2 :
+    #         img = Image.open("FungAI/boletus_edulis.jpeg")
+    #         type = "Boletus Edulis"
 
 
     print("\n 🍄 Processing image...\n")
