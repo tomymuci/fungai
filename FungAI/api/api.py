@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from FungAI.interface.main import evaluate, pred
-
+import os
 
 app = FastAPI()
 

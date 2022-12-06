@@ -39,6 +39,7 @@ def make_model(img_size=(200,280), lr=0.001, mod_num=3):
     x=base_model.output
     x=BatchNormalization(axis=-1, momentum=0.99, epsilon=0.001 )(x)
     x = Dense(256, kernel_regularizer = regularizers.l2(l = 0.016),activity_regularizer=regularizers.l1(0.006),
+<<<<<<< HEAD
                     bias_regularizer=regularizers.l1(0.006) ,activation='relu')(x)
     x=Dropout(rate=.4, seed=123)(x)
     output=Dense(class_count, activation='softmax')(x)
@@ -48,11 +49,19 @@ def make_model(img_size=(200,280), lr=0.001, mod_num=3):
 
     model.compile(Adamax(learning_rate=lr), loss='categorical_crossentropy', metrics=['accuracy', F1_score, 'AUC'])
 
+=======
+                    bias_regularizer = regularizers.l1(0.006), activation = 'relu')(x)
+    x = Dropout(rate = .4, seed = 123)(x)
+    output = Dense(9, activation='softmax')(x)
+    model = Model(inputs=base_model.input, outputs=output)
+    model.compile(Adamax(learning_rate = learning_rate), loss = loss, metrics = metrics)
+>>>>>>> 5397d2b7bfb5b289a6392cc520611edcf2fecbf1
 
     return model
 
 ##########-----------TRAINING/EVALUATING/PREDICTING MODEL-----------##########
 
+<<<<<<< HEAD
 
 def train_model(model, train_gen, valid_gen,  epochs = 50, patience = 1, initial_epoch=0, shuffle=False, validation_steps=None ) :
 
@@ -64,6 +73,15 @@ def train_model(model, train_gen, valid_gen,  epochs = 50, patience = 1, initial
 
     history=model.fit(x=train_gen,   epochs=50, verbose=1, callbacks=[es],  validation_data=valid_gen,
                 validation_steps=validation_steps,  shuffle=shuffle,  initial_epoch=initial_epoch)
+=======
+    es = EarlyStopping(monitor = 'val_accuracy',
+                       mode = 'max',
+                       patience = patience,
+                       verbose = 1,
+                       restore_best_weights = True)
+
+    history = model.fit(X, y, batch_size = batch_size, epochs = epochs, callbacks = [es], verbose = 1, validation_split = validation_split)
+>>>>>>> 5397d2b7bfb5b289a6392cc520611edcf2fecbf1
 
     return model, history
 
