@@ -6,11 +6,14 @@ from sklearn.model_selection import train_test_split
 from random import randint
 from PIL import Image
 
-from FungAI.data_sources.load import load_local
-from FungAI.ml.model import initialize_model, train_model, evaluate_model, predict_new
+from FungAI.data_sources.load import make_dataframes, trim, make_gens
+from FungAI.ml.model import make_model, train_model, evaluate_model, predict_new, F1_score
 from FungAI.ml.registry import save_model_local, load_model_local, save_model_mlflow, load_model_mlflow
 
 from FungAI.ml.params import LOCAL_DATA_PROCESSED_PATH, DATA_SOURCE, DATA_SAVE, DATA_LOAD, MODEL_SAVE, MODEL_LOAD
+
+
+
 
 def preprocessor() :
     '''Load the data (from local for now), preprocess it and save it.'''
@@ -26,7 +29,8 @@ def preprocessor() :
             shutil.rmtree(LOCAL_DATA_PROCESSED_PATH)
             os.mkdir(LOCAL_DATA_PROCESSED_PATH)
 
-        _X, _y = load_local()
+        train_df, test_df, valid_df = make_dataframes(train_dir,test_dir, val_dir) #Loading the local df's
+        #This already brings the data set splitted into 3
 
     elif DATA_SOURCE == 'cloud' :
 
@@ -35,14 +39,19 @@ def preprocessor() :
 
     print("\n 🍄 Loading done, preprocessing starting...\n")
 
-    labels = np.unique(_y)
-    encoder = LabelBinarizer()
-    encoder.fit(labels)
+    max_samples=240
+    min_samples=240
+    column='labels'
 
-    y = encoder.transform(_y)
-    X = _X / 255
+    train_df = trim(train_df, max_samples, min_samples, column)
 
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.33, random_state = 42)
+
+    img_size=(200,280)# reduce image size to reduce training time but is a trade off because it may reduce model performance
+    batch_size=30
+    ycol='labels'
+
+
+    train_gen, test_gen, valid_gen, test_steps= make_gens(batch_size, ycol, train_df, test_df, valid_df, img_size)
 
     print("\n 🍄 Processing done, saving...\n")
 
@@ -60,15 +69,15 @@ def preprocessor() :
 
     print("\n 🍄 Data saved\n")
 
-    return None
+    return train_gen, test_gen, valid_gen
 
 def train() :
     '''Train a model with the saved data.'''
 
     params = {'epochs' : 1,
               'batch_size' : 16,
-              'patience' : 5,
-              'metrics' : ['accuracy'],
+              'patience' : 10,
+              'metrics' : ['accuracy',F1_score, 'AUC'],
               'loss' : 'categorical_crossentropy',
               'learning_rate' : 0.001
              }
@@ -90,16 +99,12 @@ def train() :
 
     print("\n 🍄 Initializing model...\n")
 
-    model = initialize_model(metrics = params['metrics'], loss = params["loss"], learning_rate = params["learning_rate"])
+    model = make_model()
 
     print("\n 🍄 Training model...\n")
 
     model, history = train_model(model = model,
-                                 X = X_train,
-                                 y = y_train,
-                                 epochs = params["epochs"],
-                                 batch_size = params["batch_size"],
-                                 patience = params["patience"])
+                                 valid_gen=valid_gen)
 
     print("\n 🍄 Model trained\n")
 
