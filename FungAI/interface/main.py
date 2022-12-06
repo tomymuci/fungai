@@ -76,13 +76,8 @@ def train() :
 
     params = {'epochs' : 1,
               'batch_size' : 16,
-<<<<<<< HEAD
               'patience' : 10,
               'metrics' : ['accuracy',F1_score, 'AUC'],
-=======
-              'patience' : 5,
-              'metrics' : ['accuracy'],
->>>>>>> 5397d2b7bfb5b289a6392cc520611edcf2fecbf1
               'loss' : 'categorical_crossentropy',
               'learning_rate' : 0.001
              }

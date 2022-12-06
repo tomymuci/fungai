@@ -58,7 +58,7 @@ def train_model(model, train_gen, valid_gen,  epochs = 50, patience = 1, initial
 
     es = EarlyStopping(monitor = 'val_accuracy',
                     mode = 'max',
-                    patience = 5,
+                    patience = 5,s
                     verbose = 1,
                     restore_best_weights = True)
 
