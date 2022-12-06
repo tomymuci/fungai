@@ -6,8 +6,15 @@ all_mushroom_tables = {
                 </ul>
             </li>
         </ul>
-    </div>""" }
-        ,
+    </div>""" ,
+        2: """<div class='info'>
+                    <ul>
+                    <li>Better don't touch that stuff!
+                    </ul>
+                    </li>
+                    </ul>
+                    </div>"""
+},
 
 "Boletus": {1 :  """<div class='info'>
                     <ul>
