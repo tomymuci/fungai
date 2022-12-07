@@ -1,4 +1,4 @@
-FROM tensorflow/tensorflow:2.10.0
+FROM tensorflow/tensorflow:2.9.1
 
 COPY requirements_prod.txt /requirements.txt
 COPY .env /.env

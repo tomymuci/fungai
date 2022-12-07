@@ -1,25 +1,25 @@
 import os
-import pickle
-import shutil
 import mlflow
+from tensorflow.keras.models import load_model
 
 from FungAI.ml.params import MLFLOW_TRACKING_URI, MLFLOW_EXPERIMENT, MLFLOW_MODEL_NAME, LOCAL_REGISTRY_PATH, MLFLOW_MODEL_STATUS
 
 def save_model_local(model = None) :
     '''Save a model in local directory'''
 
-    if LOCAL_REGISTRY_PATH not in os.listdir(".") :
-        os.mkdir(LOCAL_REGISTRY_PATH)
+    # if LOCAL_REGISTRY_PATH not in os.listdir(".") :
+    #     os.mkdir(LOCAL_REGISTRY_PATH)
 
-    if model is not None:
-        shutil.rmtree(LOCAL_REGISTRY_PATH)
-        os.mkdir(LOCAL_REGISTRY_PATH)
-        pickle.dump(model, open(f'{LOCAL_REGISTRY_PATH}/model.pkl', 'wb'))
-        message = "\n 🍄 Model saved\n"
-    else :
-        message = "\n❗️Model is None, cannot save❗️\n"
+    # if model is not None:
+    #     shutil.rmtree(LOCAL_REGISTRY_PATH)
+    #     os.mkdir(LOCAL_REGISTRY_PATH)
+    #     pickle.dump(model, open(f'{LOCAL_REGISTRY_PATH}/model.pkl', 'wb'))
+    #     message = "\n 🍄 Model saved\n"
+    # else :
+    #     message = "\n❗️Model is None, cannot save❗️\n"
 
-    return message
+    # return message
+    model.save(f'{LOCAL_REGISTRY_PATH}/model.h5')
 
 
 def load_model_local() :
@@ -31,7 +31,8 @@ def load_model_local() :
         return None
 
 
-    model = pickle.load(open(f'{LOCAL_REGISTRY_PATH}/model.pkl', 'rb'))
+    #model = pickle.load(open(f'{LOCAL_REGISTRY_PATH}/model.pkl', 'rb'))
+    model = load_model(f'{LOCAL_REGISTRY_PATH}/model.h5')
 
     return model
 
