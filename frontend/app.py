@@ -13,8 +13,9 @@ from PIL import Image
 import matplotlib.pyplot as plt
 from data import all_mushroom_tables, all_info_tables
 import os
+favicon = ":shark:"
 
-st.set_page_config(layout="wide")
+st.set_page_config(layout="wide", page_title= "FungAI", page_icon = favicon)
 
 
 # This is creating the headlines
@@ -68,6 +69,7 @@ def add_bg_from_local(image_file):
     .stButton {{
         font-size: 40px;
         text-align: center;
+        font-family: sans serif arvo;
         margin-top: 10px;
         opacity: 0.8;
             }}
@@ -77,7 +79,7 @@ def add_bg_from_local(image_file):
         color: black;
         font-size: 20 px;
         opacity: 0.8;
-        font-family: sans serif;
+        font-family: sans serif arvo;
         border-collapse: separate;
         border-spacing: 15px 15px;
         text-align: center;
@@ -88,6 +90,7 @@ def add_bg_from_local(image_file):
     #aditional_information {{
         font-size:30px;
         text-align: center;
+        font-family: sans serif arvo;
         margin-top: 10px;
         opacity: 0.8;
             }}
@@ -96,6 +99,7 @@ def add_bg_from_local(image_file):
         background-color: white;
         color: black;
         font-size:40px;
+        font-family: sans serif arvo;
         margin-bottom:20px;
         text-align: center;
         opacity:0.8;
@@ -185,7 +189,7 @@ if button and uploaded_file is not None:
         # choices = st.radio( "Which recipes do u want?" )
         col1, col2 = st.columns(2)
         dir_recs = f'images_for_app/Recipe images/{predicted_genus}'
-        images = os.listdir(dir_recs)
+        images = [img for img in os.listdir(dir_recs) if not img.startswith(".DS")]
 
         with col1:
                 st.markdown(f"""<div id="examples"> Shroooms Everywhere! </div>""" , unsafe_allow_html = True)
