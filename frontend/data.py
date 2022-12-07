@@ -145,7 +145,139 @@ all_mushroom_tables = {
                     </li>
                     </ul>
                     </div>"""
-}}
+},
+
+    "Agaricus":
+            {1 :  """<div class='info'>
+                    <ul>
+                    <li>INGREDIENTS
+                    <ul>
+                    <li>Tortillas – Choose your favorite! Flour tortillas, corn tortillas, or a flour/corn mix would all work here.</li>
+                    <li>Grilled portobello mushrooms – With their juicy, meaty texture, portobello mushrooms are one of my favorite plant-based taco fillings. I season them with balsamic vinegar and tamari or soy sauce to bring out their savory flavor.</li>
+                    <li>Avocado slices – For creamy richness.</li>
+                    <li>Shredded red cabbage – It adds a perfect crunch.</li>
+                    <li>Fresh cilantro – A veggie taco essential!</li>
+                    <li>Creamy vegan jalapeño sauce – Last, but not least! Make it as spicy as you like. Use 1/2 of a jalapeño for a mildly spicy sauce, 1 for medium, or 2 for extra spicy. Start with less and taste, because you can always add more.</li>
+                    </ul>
+                    </li>
+                    <li>INSTRUCTIONS
+                    <ul>
+                    <li>When your taco filling ingredients are ready, char the tortillas and load them up. If you want even more heat, finish the portobello tacos with a few extra jalapeño slices, and enjoy!</li>
+
+                    </ul>
+                    </li>
+                        </ul>"""
+,
+        2: """<div class='info'>
+                    <ul>
+                    <li>INGREDIENTS
+                    <ul>
+                    <li>3 tablespoons (45 ml) extra-virgin olive oil</li>
+                    <li>2 shallots, halved lengthwise and thinly sliced</li>
+                    <li>Kosher salt</li>
+                    <li>3 (350 g) portobello mushroom caps (10 -12 ounces), sliced into 1-inch pieces</li>
+                    <li>8 ounces (225 g) pappardelle pasta, fresh or dried</li>
+                    <li>1 garlic clove, finely sliced</li>
+                    <li>2 teaspoons finely chopped fresh rosemary leaves</li>
+                    <li>1/2 teaspoon red chili flakes</li>
+                    <li>2 tablespoons (30 g) tomato paste</li>
+                    <li>1 teaspoon balsamic vinegar</li>
+                    <li>2 tablespoons (30 g) unsalted butter</li>
+                    <li>1 chunk (50 g) Parmigiano Reggiano or Parmesan cheese</li>
+                    </ul>
+                    </li>
+                    <li>INSTRUCTIONS
+                    <ul>
+                    <li>Put the oil, shallots and a pinch of salt in a large skillet and place over medium heat. Cook, stirring frequently, until the shallots are softened, but not browned.</li>
+                    <li>Add the mushrooms to the pan. Cook the mushrooms for a few minutes until they take on some color, then stir and add 1/2 teaspoon salt. Continue cooking until the mushrooms become tender and their liquid evaporates.</li>
+                    <li>Meanwhile, bring a large pot of water to a boil and add 2 tablespoons kosher salt. Cook the pasta until al dente. Scoop out and reserve 1/2 cup of the pasta water, then drain the pasta.</li>
+                    <li>Add the garlic, rosemary, chili, tomato paste, vinegar and butter to the mushrooms. Add 1/3 cup of the pasta water and stir over medium heat until the mixture becomes saucy. Add the pasta to the pan and toss gently with tongs to coat with the sauce, adding more water if it seems too dry. Taste for seasoning.</li>
+                    <li>Shave curls of Parmigiano cheese over the pasta with a vegetable peeler and serve.</li>
+                    </ul>
+                    </li>
+                    </ul>
+                    </div>"""
+},
+    "Cortinarus":
+            {1: """<div class='info'>
+            <ul>
+            <li>Better don't touch that stuff!
+                </ul>
+            </li>
+        </ul>
+    </div>""" ,
+        2: """<div class='info'>
+                    <ul>
+                    <li>Better don't touch that stuff!
+                    </ul>
+                    </li>
+                    </ul>
+                    </div>"""
+},
+    "Entoloma":
+            {1: """<div class='info'>
+            <ul>
+            <li>Better don't touch that stuff!
+                </ul>
+            </li>
+        </ul>
+    </div>""" ,
+        2: """<div class='info'>
+                    <ul>
+                    <li>Better don't touch that stuff!
+                    </ul>
+                    </li>
+                    </ul>
+                    </div>"""
+},
+    "Hygrocybe":
+            {1: """<div class='info'>
+            <ul>
+            <li>Better don't touch that stuff!
+                </ul>
+            </li>
+        </ul>
+    </div>""" ,
+        2: """<div class='info'>
+                    <ul>
+                    <li>Better don't touch that stuff!
+                    </ul>
+                    </li>
+                    </ul>
+                    </div>"""
+},
+    "Russula":
+            {1: """<div class='info'>
+            <ul>
+            <li>Better don't touch that stuff!
+                </ul>
+            </li>
+        </ul>
+    </div>""" ,
+        2: """<div class='info'>
+                    <ul>
+                    <li>Better don't touch that stuff!
+                    </ul>
+                    </li>
+                    </ul>
+                    </div>"""
+},
+    "Suillius":
+            {1: """<div class='info'>
+            <ul>
+            <li>Better don't touch that stuff!
+                </ul>
+            </li>
+        </ul>
+    </div>""" ,
+        2: """<div class='info'>
+                    <ul>
+                    <li>Better don't touch that stuff!
+                    </ul>
+                    </li>
+                    </ul>
+                    </div>"""
+},}
 
 
 all_info_tables = {
@@ -173,7 +305,7 @@ all_info_tables = {
     ,
 
     "Agaricus":
-    """Agaricus is the most common genus of mushroom in the world.
+    """☠️☠️☠️Agaricus is the most common genus of mushroom in the world.
     It contains both edible and non-edible/poisonous species, with over 400+
     different varieties across the world. Its most notable contribution to dinner
     tables across the world is Agaricus Bisporus, known by many names including Cremini
@@ -181,7 +313,7 @@ all_info_tables = {
 
     ,
      "Cortinarus":
-    """Cortinarius mushrooms can be found all across the world, with over 2000 different
+    """☠️☠️☠️Cortinarius mushrooms can be found all across the world, with over 2000 different
     species. The defining feature among all species of Cortinarius are the cortina (veils)
     connecting from the stem to the cap, hence the name Cortinarius.
     Many of the species are toxic, so consumption is highly discouraged by mycological
@@ -191,7 +323,7 @@ all_info_tables = {
 
     ,
     "Entoloma":
-    """The Entoloma genus is extensive, with over 1000 different species found across
+    """☠️☠️☠️The Entoloma genus is extensive, with over 1000 different species found across
     the world. Many Entolomas are saprobic (meaning they feed on decaying organic matter),
     while others are mycorrhizal. The Entoloma genus is responsible for many
     intoxications, specifically Entoloma Sinuatum across Europe and Northern America.
@@ -202,7 +334,7 @@ all_info_tables = {
 
     ,
     "Hygrocybe":
-    """Hygrocybe are a common genus of gilled mushrooms, known as Wax Caps in Northern
+    """☠️☠️☠️Hygrocybe are a common genus of gilled mushrooms, known as Wax Caps in Northern
     America due to their bright colored caps and wax like surfaces. They are typically
     found in woodlands and unimproved grasslands. A few species are edible and sold
     in markets around the world, but are not cultivated anywhere due to their
@@ -222,7 +354,7 @@ all_info_tables = {
     ,
 
     "Russula":
-    """The Russula genus is one of the most common and easily recognizable mushroom
+    """☠️☠️☠️The Russula genus is one of the most common and easily recognizable mushroom
     genres in the world. There are over 750 different species, with many of them
     having large and bright fruiting bodies. They are particularly known in the
     mycology world for having incredibly brittle gills that break easily, giving
@@ -236,7 +368,7 @@ all_info_tables = {
     ,
 
         "Suillius":
-    """Suillius is a subgenre of the Boletus family. Suillius and Boletus share
+    """☠️☠️☠️Suillius is a subgenre of the Boletus family. Suillius and Boletus share
     many of the same characteristics, most noticeably the lack of gills for
     sponge-like Hymenial pores. They are known for their notoriously slimy caps,
     and have been nicknamed slippery jacks. Some Suillus species are edible,
