@@ -147,8 +147,8 @@ if button and uploaded_file is not None:
     }
     response = requests.get(url, params=params)
     if response.status_code == 200:
-        genuses = response.json()['genuses']
-        predicted_genus = [key for key, value in genuses.items() if float(value)==1.0][0]
+        genuses = response.json()
+        predicted_genus = max(genuses, key=genuses.get)
         st.write(f'{predicted_genus}')
 
 

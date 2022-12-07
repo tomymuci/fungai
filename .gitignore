@@ -2,10 +2,10 @@
 __pycache__/
 *.py[cod]
 *$py.class
+models
 
 processed
 raw_data/Mushrooms
-models
 *.DS_Store
 
 # C extensions

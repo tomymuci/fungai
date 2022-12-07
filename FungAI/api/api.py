@@ -28,4 +28,4 @@ def predict(image = None) :
 
     prediction = pred(new_image=image)
 
-    return {"genuses" : prediction}
+    return prediction
