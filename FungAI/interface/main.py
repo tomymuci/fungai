@@ -164,34 +164,17 @@ def pred(new_image = None) :
 
     print("\n 🍄 Loading image...\n")
 
-    #####---TEST---#####
-
-    new_image = Image.open("raw_data/Mushrooms/Amanita/254_Lyi3XcTltRs.jpg")
-
-
-    #####---END---#####
-
-    # if new_image is None :
-    #     print("\ngot no images, will load a random local image for tests\n")
-    #     rdm_nb = randint(0, 3)
-
-
-    #     if rdm_nb == 0 :
-    #         new_image = Image.open("FungAI/Agaricus_campestre.jpeg")
-    #         type = "Agaricus Campestre"
-    #     elif rdm_nb == 1 :
-    #         new_image = Image.open("FungAI/amanita_muscaria.jpeg")
-    #         type = "Amanita Muscaria"
-    #     elif rdm_nb == 2 :
-    #         new_image = Image.open("FungAI/boletus_edulis.jpeg")
-    #         type = "Boletus Edulis"
-    # else:
-    #     new_image = Image.open(new_image)
+    if new_image is None :
+        print("\ngot no images, will load a random local image for tests\n")
+        image = Image.open("FungAI/743_iQYj9irR9d4.jpg")
+        shroom_type = "Amanita"
+    else:
+        image = new_image
 
 
     print("\n 🍄 Processing image...\n")
 
-    trans_img = np.array(new_image.resize((200, 280)))
+    trans_img = np.array(image.resize((200, 280)))
     X = np.concatenate(trans_img, axis = 0).reshape((1, 200, 280, 3))
 
     print("\n 🍄 Loading Model...\n")
@@ -213,10 +196,10 @@ def pred(new_image = None) :
 
     genus = {}
     for label, pred in zip(labels, prediction) :
-        genus[label] = f"{pred}"
-        print(f"{label} : {round(pred, 2)*100} %")
+        genus[label] = round(pred* 100, 2)
+        print(f"{label} : {round(pred* 100, 2)} %")
 
     if new_image is None :
-        print(f"\n 🍄 It is suppose to be {type} 🙃\n")
+        print(f"\n 🍄 It is suppose to be {shroom_type}\n")
 
     return genus

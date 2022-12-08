@@ -1,8 +1,9 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 
 from FungAI.interface.main import evaluate, pred
-import os
+from PIL import Image
+import io
 
 app = FastAPI()
 
@@ -23,9 +24,11 @@ def eval() :
     metrics = evaluate()
     return dict(Loss = float(metrics["loss"]), Accuracy = float(metrics["Accuracy"]))
 
-@app.get("/predict")
-def predict(image = None) :
+@app.post("/predict")
+async def predict(image: UploadFile = File(...)) :
 
-    prediction = pred(new_image=image)
+    _img = await image.read()
+    img = Image.open(io.BytesIO(_img))
+    prediction = pred(new_image = img)
 
     return {"genuses" : prediction}

@@ -72,4 +72,4 @@ def predict_new(model, X, batch_size = 16) :
 
     y_pred = model.predict(x = X, batch_size = batch_size, verbose = 1, callbacks = None)
 
-    return
+    return y_pred
