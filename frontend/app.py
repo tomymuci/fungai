@@ -2,15 +2,9 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 import base64
-import random
-import json
 import requests
-from google.oauth2 import service_account
-from google.cloud import storage
-from io import StringIO
 import io
 from PIL import Image
-import matplotlib.pyplot as plt
 from data import all_mushroom_tables, all_info_tables
 import os
 
@@ -145,10 +139,10 @@ if button and uploaded_file is not None:
     #url = 'http://127.0.0.1:1234/predict'
     file = {"image" : bytes_data}
     response = requests.post(url, files=file)
-    print(response)
+
     if response.status_code == 200:
         genuses = response.json()["genuses"]
-        print(genuses)
+
         predicted_genus = max(genuses, key=genuses.get)
         st.write(f'{predicted_genus}')
 
