@@ -31,4 +31,4 @@ async def predict(image: UploadFile = File(...)) :
     img = Image.open(io.BytesIO(_img))
     prediction = pred(new_image = img)
 
-    return {"genuses" : prediction}
+    return prediction

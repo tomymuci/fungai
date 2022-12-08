@@ -2,20 +2,14 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 import base64
-import random
-import json
 import requests
-from google.oauth2 import service_account
-from google.cloud import storage
-from io import StringIO
 import io
 from PIL import Image
-import matplotlib.pyplot as plt
 from data import all_mushroom_tables, all_info_tables
 import os
-favicon = ":shark:"
 
-st.set_page_config(layout="wide", page_title= "FungAI", page_icon = favicon)
+
+st.set_page_config(layout="wide", page_title= "FungAI", page_icon = ":shark:")
 
 
 # This is creating the headlines
@@ -111,7 +105,7 @@ def add_bg_from_local(image_file):
     """,
     unsafe_allow_html=True
     )
-add_bg_from_local('images_for_app/background2.jpg')
+#add_bg_from_local('images_for_app/background2.jpg')
 
 
 
@@ -141,14 +135,15 @@ if uploaded_file is not None:
 # Print alayse and additional information
 
 if button and uploaded_file is not None:
-    url = 'http://localhost:1234/predict'
-    params = {
-    'new_image': image
-    }
-    response = requests.get(url, params=params)
+    url = 'https://fungai-tec6gbmrsa-ew.a.run.app/predict'
+    #url = 'http://127.0.0.1:1234/predict'
+    file = {"image" : bytes_data}
+    response = requests.post(url, files=file)
+
     if response.status_code == 200:
-        genuses = response.json()['genuses']
-        predicted_genus = [key for key, value in genuses.items() if float(value)==1.0][0]
+        genuses = response.json()["genuses"]
+
+        predicted_genus = max(genuses, key=genuses.get)
         st.write(f'{predicted_genus}')
 
 
