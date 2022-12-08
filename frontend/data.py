@@ -163,10 +163,8 @@ all_mushroom_tables = {
                     <li>INSTRUCTIONS
                     <ul>
                     <li>When your taco filling ingredients are ready, char the tortillas and load them up. If you want even more heat, finish the portobello tacos with a few extra jalapeño slices, and enjoy!</li>
-
                     </ul>
-                    </li>
-                        </ul>"""
+                    </li>"""
 ,
         2: """<div class='info'>
                     <ul>
@@ -293,6 +291,17 @@ all_info_tables = {
 
 """
 ,
+    "Boletus":
+    """ The Boletus genus is characterized by its lack of gills. Instead, below
+    the cap is a sponge-like flesh called Hymenial pores. The Boletus genus are
+    ectomycorrhizal fungi, forming symbiotic relationships between the root systems
+    of certain plants (including trees), providing immune support and aiding
+    nutrient exchange between the ecosystem. The Boletus genus contains a few
+    edible mushrooms, with the most notable being Boletus Edulis. There are many
+    toxic species, and an easy rule of thumb to guide any forager is to avoid
+    Bolet’s with red Hymenial pores.
+    """
+,
     "Lactarius":
     """The Boletus genus is characterized by its lack of gills.
     Instead, below the cap is a sponge-like flesh called Hymenial pores.
@@ -305,7 +314,7 @@ all_info_tables = {
     ,
 
     "Agaricus":
-    """☠️☠️☠️Agaricus is the most common genus of mushroom in the world.
+    """Agaricus is the most common genus of mushroom in the world.
     It contains both edible and non-edible/poisonous species, with over 400+
     different varieties across the world. Its most notable contribution to dinner
     tables across the world is Agaricus Bisporus, known by many names including Cremini
